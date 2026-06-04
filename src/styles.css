@@ -194,7 +194,8 @@ button {
   color: var(--muted);
   line-height: 1.8;
   font-size: 1.02rem;
-  max-width: 35rem;
+  max-width: 42rem;
+  white-space: pre-line;
 }
 
 .quick-meta {
@@ -823,8 +824,8 @@ html:lang(zh) .contact-item {
   z-index: 7;
   transform: rotate(-2deg);
   --label-left: auto;
-  --label-right: 100%;
-  --label-top: 50%;
+  --label-right: 80%;
+  --label-top: 30%;
   --label-bottom: auto;
   --label-translate-hidden: 0.2rem -50%;
   --label-translate-visible: -0.2rem -50%;
@@ -1004,13 +1005,17 @@ html:lang(zh) .contact-item {
 }
 
 .detail-copy h1 {
-  font-size: clamp(3rem, 5.4vw, 5.8rem);
+  font-size: clamp(2.2rem, 3.8vw, 3.6rem);
 }
 
 .detail-subtitle {
   font-size: clamp(1.14rem, 1.8vw, 1.46rem);
   font-weight: 800;
   margin: 22px 0 14px;
+}
+
+.detail-subtitle:empty {
+  display: none;
 }
 
 .skill-cloud {

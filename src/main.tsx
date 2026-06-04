@@ -21,7 +21,7 @@ type DetailPage = {
   subtitle: Record<Lang, string>;
   intro: Record<Lang, string>;
   timeline: Array<{
-    date: string;
+    date: Record<Lang, string>;
     title: Record<Lang, string>;
     body: Record<Lang, string>;
   }>;
@@ -41,40 +41,40 @@ const pages: DetailPage[] = [
     },
     title: { en: "Self Introduction", zh: "自我介绍" },
     subtitle: {
-      en: "Hannah Gao | Robotics, control, simulation, and AI Agents.",
-      zh: "Hannah Gao | 机器人、控制、仿真与 AI Agent。",
+      en: "",
+      zh: "",
     },
     intro: {
-      en: "I am Hannah Gao, a robotics and AI systems builder whose work connects control theory, simulation, software engineering, and multimodal Agent workflows. I like turning abstract models into systems that can move, reason, and be shown clearly.",
-      zh: "我是 Hannah Gao，一个机器人与 AI 系统构建者，我的工作连接控制理论、仿真、软件工程和多模态 Agent 工作流。我喜欢把抽象模型变成能运动、能推理、能被清晰展示的系统。",
+      en: "I am a cross-disciplinary technologist with a background in automation and artificial intelligence. My systematic training through undergraduate and master's programs has equipped me with an interdisciplinary knowledge framework spanning mechanical engineering, automatic control, and software architecture. I specialize in integrating complex low-level control logic with cutting-edge AI Agent technologies in robotic system development, with full-stack capability covering simulation environment setup, algorithm optimization, and system engineering deployment.\n\nIn terms of core competencies, I possess deep theoretical foundations in control algorithms and robotic simulation, can proficiently architect multimodal AI Agent systems, and excel at applying Python/C programming skills to complex real-world business scenarios. My rigorous engineering mindset enables me to efficiently resolve communication efficiency and system stability challenges in hardware-software co-design.\n\nBeyond hands-on internship experience at renowned research institutions and leading tech companies, I maintain a keen insight into frontier AI technologies. Through sustained technical practice, I have developed rapid technology transfer and environmental adaptation capabilities, allowing me to quickly dive into new domains and deliver high-quality code implementations. I value not only theoretical depth, but also scalability and deployment efficacy in engineering practice. I look forward to contributing solid professional expertise, a rigorous engineering attitude, and a continuous passion for learning to drive R&D innovation within the team.",
+      zh: "我是一名自动化与人工智能背景的复合型技术开发者。本科与硕士阶段的系统化培养，使我构建了「机械工程+自动控制+软件架构」的跨学科知识图谱。我擅长在机器人系统开发中，将复杂的底层控制逻辑与前沿的AI Agent技术进行有机融合，具备从仿真环境搭建、算法策略调优到系统工程部署的全栈式技术能力。\n\n在核心能力方面，我具备深厚的控制算法与机器人仿真理论功底，能够熟练驾驭多模态AI Agent的架构设计，并擅长将Python/C编程技能应用于复杂的业务场景落地。我的工程思维严谨，能够高效解决软硬件协同过程中的通信效率与系统稳定性问题。\n\n我不仅拥有在知名科研机构与头部科技企业工作的深度实习经验，更保持着对前沿AI技术的敏锐洞察。通过长期的技术实践，我养成了极快的技术迁移与环境适应能力，能够迅速切入新领域并输出高质量的代码实现。我不仅追求技术的理论深度，更看重技术在工程实践中的可扩展性与落地效能。我期待能以扎实的专业功底、严谨的工程态度及持续进取的学习热情，为团队的研发创新贡献价值。",
     },
     timeline: [
       {
-        date: "教育背景",
-        title: { en: "Robotics and automation foundation", zh: "机器人与自动化基础" },
+        date: { en: "Education", zh: "教育背景" },
+        title: { en: "B.Eng. + M.Sc. in Automation & Robotics", zh: "本科+硕士：自动化与机器人" },
         body: {
-          en: "My academic path is grounded in automation, robotics engineering, control theory, and advanced robotics, with a strong interest in real robot behavior.",
-          zh: "我的学术路径根植于自动化、机器人工程、控制理论和高级机器人学，对真实机器人行为有浓厚兴趣。",
+          en: "Systematic training across mechanical engineering, automatic control, and software architecture, building a cross-disciplinary knowledge framework for intelligent systems.",
+          zh: "机械工程、自动控制与软件架构的系统化培养，构建面向智能系统的跨学科知识体系。",
         },
       },
       {
-        date: "核心关注",
-        title: { en: "From control loops to intelligent systems", zh: "从控制回路到智能系统" },
+        date: { en: "Core Focus", zh: "核心方向" },
+        title: { en: "Control × AI Agents × Full-Stack Delivery", zh: "控制 × AI Agent × 全栈交付" },
         body: {
-          en: "My portfolio is organized around the versions of me that build robot control, AI Agent workflows, PID reasoning, code systems, and creative learning habits.",
-          zh: "我的作品集围绕不同版本的我展开——构建机器人控制、AI Agent 工作流、PID 推理、代码系统和创造性学习习惯的我。",
+          en: "Bridging low-level robot control with multimodal AI Agent workflows — from simulation and algorithm tuning to system engineering deployment.",
+          zh: "打通底层机器人控制与多模态AI Agent工作流——从仿真、算法调优到系统工程部署。",
         },
       },
     ],
-    skills: ["Robotics", "Control", "Simulation", "AI Agents", "Software Engineering", "Creative Systems"],
+    skills: ["Automation", "Robotics", "Control Theory", "AI Agents", "Simulation", "Python/C", "Full-Stack Development"],
     diagram: {
-      en: ["Education", "Robotics Control", "Simulation", "AI Agents", "Portfolio Story"],
-      zh: ["教育背景", "机器人控制", "仿真", "AI Agent", "作品集故事"],
+      en: ["Mechanical Engineering", "Automatic Control", "Software Architecture", "AI Agents", "System Deployment"],
+      zh: ["机械工程", "自动控制", "软件架构", "AI Agent", "系统部署"],
     },
     media: [
-      { en: "Portrait or graduation photo", zh: "肖像或毕业照" },
-      { en: "Resume highlight image", zh: "简历亮点图片" },
-      { en: "Portfolio overview snapshot", zh: "作品集概览截图" },
+      { en: "Graduation photo 1", zh: "毕业照 1" },
+      { en: "Graduation photo 2", zh: "毕业照 2" },
+      { en: "Graduation photo 3", zh: "毕业照 3" },
     ],
     accent: "cyan",
   },
@@ -99,7 +99,7 @@ const pages: DetailPage[] = [
     },
     timeline: [
       {
-        date: "2025.09 - 2025.12",
+        date: { en: "2025.09 - 2025.12", zh: "2025.09 - 2025.12" },
         title: { en: "Agibot | Algorithm Simulation Intern", zh: "智元机器人 | 算法仿真实习生" },
         body: {
           en: "Built a dexterous hand simulation model with Sim-MuJoCo, coordinated ROS 2 communication with an MC controller, and optimized command/state feedback for real-time interaction.",
@@ -107,7 +107,7 @@ const pages: DetailPage[] = [
         },
       },
       {
-        date: "2024.04 - 2024.10",
+        date: { en: "2024.04 - 2024.10", zh: "2024.04 - 2024.10" },
         title: { en: "Chinese Academy of Sciences | Research Assistant", zh: "中国科学院 | 科研助理" },
         body: {
           en: "Configured reinforcement learning environments on Linux and completed humanoid robot simulation debugging in Isaac Gym and MuJoCo for walking and jumping control.",
@@ -145,7 +145,7 @@ const pages: DetailPage[] = [
     },
     timeline: [
       {
-        date: "2026.05 - 2026.07",
+        date: { en: "2026.05 - 2026.07", zh: "2026.05 - 2026.07" },
         title: { en: "SENGITAL | Industry AI Agent Development Intern", zh: "SENGITAL | 行业 AI Agent 开发实习生" },
         body: {
           en: "Developed industry-specific Agents on poffices.AI, built custom Blocks, configured node-based logic, embedded Python scripts, and supported online optimization.",
@@ -153,7 +153,7 @@ const pages: DetailPage[] = [
         },
       },
       {
-        date: "2025.11 - 2026.06",
+        date: { en: "2025.11 - 2026.06", zh: "2025.11 - 2026.06" },
         title: { en: "Multimodal AI Agent System R&D", zh: "多模态 AI Agent 系统研发" },
         body: {
           en: "Led architecture work with LLM, VLM, YOLO, OpenCV, LangChain RAG pipelines, Ray scheduling, and image/PPT generation Agents.",
@@ -191,7 +191,7 @@ const pages: DetailPage[] = [
     },
     timeline: [
       {
-        date: "2021 - 2026",
+        date: { en: "2021 - 2026", zh: "2021 - 2026" },
         title: { en: "Automation and Control Coursework", zh: "自动化与控制课程体系" },
         body: {
           en: "Studied Automatic Control Theory, Control and Industrial Automation, Robotics Engineering, and Advanced Robotics across undergraduate and master programs.",
@@ -199,7 +199,7 @@ const pages: DetailPage[] = [
         },
       },
       {
-        date: "Applied Projects",
+        date: { en: "Applied Projects", zh: "应用项目" },
         title: { en: "Control tuning in simulation", zh: "仿真中的控制调参" },
         body: {
           en: "Applied controller reasoning to dexterous hand, humanoid robot, and serpentine robot simulation workflows.",
@@ -237,7 +237,7 @@ const pages: DetailPage[] = [
     },
     timeline: [
       {
-        date: "Core Stack",
+        date: { en: "Core Stack", zh: "核心技术栈" },
         title: { en: "Programming and algorithms", zh: "编程与算法" },
         body: {
           en: "Proficient in C, Python, and MATLAB; experienced with PPO/SAC/DDPG, genetic optimization, Bayesian optimization, and robot control code tuning.",
@@ -245,7 +245,7 @@ const pages: DetailPage[] = [
         },
       },
       {
-        date: "Product Work",
+        date: { en: "Product Work", zh: "产品交付" },
         title: { en: "Full-stack AI system delivery", zh: "全栈 AI 系统交付" },
         body: {
           en: "Completed front-end and back-end development with Cursor and Claude Code, supporting local deployment and platform engineering deployment.",
@@ -283,7 +283,7 @@ const pages: DetailPage[] = [
     },
     timeline: [
       {
-        date: "Creative Practice",
+        date: { en: "Creative Practice", zh: "创造性实践" },
         title: { en: "Music and reading", zh: "音乐与阅读" },
         body: {
           en: "Guitar and books are quiet ways to reset attention, build taste, and keep learning personal.",
@@ -291,7 +291,7 @@ const pages: DetailPage[] = [
         },
       },
       {
-        date: "Design Thinking",
+        date: { en: "Design Thinking", zh: "设计思维" },
         title: { en: "Sketching before building", zh: "先画再做" },
         body: {
           en: "I often turn abstract ideas into sketches, diagrams, and workflows before implementing them.",
@@ -565,8 +565,8 @@ function Timeline({ page, lang }: { page: DetailPage; lang: Lang }) {
     <section className="timeline-card">
       <h2>{lang === "en" ? "Experience Notes" : "经历笔记"}</h2>
       {page.timeline.map((item) => (
-        <article className="timeline-item" key={`${item.date}-${item.title.en}`}>
-          <time>{item.date}</time>
+        <article className="timeline-item" key={`${item.date.en}-${item.title.en}`}>
+          <time>{item.date[lang]}</time>
           <h3>{item.title[lang]}</h3>
           <p>{item.body[lang]}</p>
         </article>
