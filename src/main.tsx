@@ -29,6 +29,17 @@ type DetailPage = {
   diagram: Record<Lang, string[]>;
   media: Array<Record<Lang, string>>;
   accent: string;
+  photos?: string[];
+  education?: Array<{
+    school: string;
+    degree: string;
+    major: string;
+    logo: string;
+    period: string;
+    research: string;
+    courses: string[];
+    gpa: string;
+  }>;
 };
 
 const pages: DetailPage[] = [
@@ -45,7 +56,7 @@ const pages: DetailPage[] = [
       zh: "",
     },
     intro: {
-      en: "I am a cross-disciplinary technologist with a background in automation and artificial intelligence. My systematic training through undergraduate and master's programs has equipped me with an interdisciplinary knowledge framework spanning mechanical engineering, automatic control, and software architecture. I specialize in integrating complex low-level control logic with cutting-edge AI Agent technologies in robotic system development, with full-stack capability covering simulation environment setup, algorithm optimization, and system engineering deployment.\n\nIn terms of core competencies, I possess deep theoretical foundations in control algorithms and robotic simulation, can proficiently architect multimodal AI Agent systems, and excel at applying Python/C programming skills to complex real-world business scenarios. My rigorous engineering mindset enables me to efficiently resolve communication efficiency and system stability challenges in hardware-software co-design.\n\nBeyond hands-on internship experience at renowned research institutions and leading tech companies, I maintain a keen insight into frontier AI technologies. Through sustained technical practice, I have developed rapid technology transfer and environmental adaptation capabilities, allowing me to quickly dive into new domains and deliver high-quality code implementations. I value not only theoretical depth, but also scalability and deployment efficacy in engineering practice. I look forward to contributing solid professional expertise, a rigorous engineering attitude, and a continuous passion for learning to drive R&D innovation within the team.",
+      en: "I am Hanna Gao, an automation and AI systems builder working across robotics control, physics simulation, and multimodal Agent workflows. My background bridges control theory, mechanical automation, and full-stack software engineering — a combination that lets me turn abstract models into systems that can move, reason, and be deployed with clarity.\n\nToday, I build across the full stack of intelligent systems: from MuJoCo simulation models and ROS 2 control nodes, to LangChain RAG pipelines and multimodal generation Agents. I've configured humanoid robots in Isaac Gym, tuned dexterous hand controllers in Sim-MuJoCo, and led architecture work on Agent systems that generate images, presentations, and structured content. What drives me is the conviction that good engineering is legible engineering — the system should tell a clear story: what it intends to do, how it measures error, and why it chose this action.",
       zh: "我是一名自动化与人工智能背景的复合型技术开发者。本科与硕士阶段的系统化培养，使我构建了「机械工程+自动控制+软件架构」的跨学科知识图谱。我擅长在机器人系统开发中，将复杂的底层控制逻辑与前沿的AI Agent技术进行有机融合，具备从仿真环境搭建、算法策略调优到系统工程部署的全栈式技术能力。\n\n在核心能力方面，我具备深厚的控制算法与机器人仿真理论功底，能够熟练驾驭多模态AI Agent的架构设计，并擅长将Python/C编程技能应用于复杂的业务场景落地。我的工程思维严谨，能够高效解决软硬件协同过程中的通信效率与系统稳定性问题。\n\n我不仅拥有在知名科研机构与头部科技企业工作的深度实习经验，更保持着对前沿AI技术的敏锐洞察。通过长期的技术实践，我养成了极快的技术迁移与环境适应能力，能够迅速切入新领域并输出高质量的代码实现。我不仅追求技术的理论深度，更看重技术在工程实践中的可扩展性与落地效能。我期待能以扎实的专业功底、严谨的工程态度及持续进取的学习热情，为团队的研发创新贡献价值。",
     },
     timeline: [
@@ -77,6 +88,44 @@ const pages: DetailPage[] = [
       { en: "Graduation photo 3", zh: "毕业照 3" },
     ],
     accent: "cyan",
+    photos: [
+      "/assets/self-introduction/photo-1.jpg",
+      "/assets/self-introduction/photo-2.jpg",
+      "/assets/self-introduction/photo-3.jpg",
+    ],
+    education: [
+      {
+        school: "The Chinese University of Hong Kong",
+        degree: "Master",
+        major: "Mechanical and Automation Engineering",
+        logo: "/assets/self-introduction/cuhk-logo.png",
+        period: "2025.09 - 2026.06",
+        research: "AI Agent R&D for image generation and PPT generation under an AI Agent field supervisor.",
+        courses: [
+          "Computer Vision",
+          "Control and Industrial Automation",
+          "Computer-Aided Design and Manufacturing",
+          "Advanced Robotics",
+        ],
+        gpa: "GPA: In progress",
+      },
+      {
+        school: "Beijing University of Chemical Technology",
+        degree: "Bachelor",
+        major: "Automation",
+        logo: "/assets/self-introduction/buct-logo.png",
+        period: "2021.09 - 2025.06",
+        research: "Automation, robot control, AI applications, and intelligent mobile robot systems.",
+        courses: [
+          "Automatic Control Theory",
+          "Artificial Intelligence Application",
+          "Robotics Engineering",
+          "Circuit Theory",
+          "Python/C Programming",
+        ],
+        gpa: "GPA: 86/100",
+      },
+    ],
   },
   {
     slug: "robotics",
@@ -513,8 +562,10 @@ function Detail({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) => void }
     return <Navigate to="/" replace />;
   }
 
+  const isSelfIntro = page.slug === "self-introduction";
+
   return (
-    <main className={`detail-page paper-grain accent-${page.accent}`}>
+    <main className={`detail-page paper-grain accent-${page.accent} ${isSelfIntro ? "self-intro-page" : ""}`}>
       <Header lang={lang} setLang={setLang} />
       <section className="detail-hero">
         <div className="detail-copy">
@@ -531,14 +582,71 @@ function Detail({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) => void }
           </div>
         </div>
 
-        <MediaShowcase page={page} lang={lang} />
+        {isSelfIntro ? <SelfIntroGallery photos={page.photos ?? []} /> : <MediaShowcase page={page} lang={lang} />}
       </section>
 
-      <section className="detail-grid">
-        <Timeline page={page} lang={lang} />
-        <Diagram page={page} lang={lang} />
-      </section>
+      {isSelfIntro ? (
+        <EducationSection education={page.education ?? []} lang={lang} />
+      ) : (
+        <section className="detail-grid">
+          <Timeline page={page} lang={lang} />
+          <Diagram page={page} lang={lang} />
+        </section>
+      )}
     </main>
+  );
+}
+
+function SelfIntroGallery({ photos }: { photos: string[] }) {
+  return (
+    <aside className="self-photo-gallery" aria-label="Graduation photos">
+      {photos.map((photo, index) => (
+        <figure className={index === 0 ? "self-photo-main" : "self-photo-small"} key={photo}>
+          <img src={photo} alt={`Graduation portrait ${index + 1}`} />
+        </figure>
+      ))}
+    </aside>
+  );
+}
+
+function EducationSection({ education, lang }: { education: NonNullable<DetailPage["education"]>; lang: Lang }) {
+  const labels: Record<Lang, { research: string; courses: string; record: string }> = {
+    en: { research: "Research Field", courses: "Core Courses", record: "Academic Record" },
+    zh: { research: "研究方向", courses: "核心课程", record: "学业成绩" },
+  };
+  const t = labels[lang];
+
+  return (
+    <section className="education-section" aria-label="Education background">
+      {education.map((item) => (
+        <article className="education-card" key={item.school}>
+          <div className="edu-logo-badge">
+            <img src={item.logo} alt={`${item.school} logo`} />
+          </div>
+          <div className="education-heading">
+            <p>{item.period}</p>
+            <h2>{item.school}</h2>
+            <h3>
+              {item.degree} · {item.major}
+            </h3>
+          </div>
+          <dl>
+            <div>
+              <dt>{t.research}</dt>
+              <dd>{item.research}</dd>
+            </div>
+            <div>
+              <dt>{t.courses}</dt>
+              <dd>{item.courses.join(" / ")}</dd>
+            </div>
+            <div>
+              <dt>{t.record}</dt>
+              <dd>{item.gpa}</dd>
+            </div>
+          </dl>
+        </article>
+      ))}
+    </section>
   );
 }
 
