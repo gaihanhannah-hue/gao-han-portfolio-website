@@ -13,6 +13,21 @@ import "./styles.css";
 
 type Lang = "en" | "zh";
 
+const appBase = import.meta.env.BASE_URL;
+const routerBasename = appBase === "/" ? undefined : appBase.replace(/\/$/, "");
+
+function publicAsset(path?: string) {
+  if (!path) {
+    return undefined;
+  }
+
+  if (/^https?:\/\//.test(path)) {
+    return path;
+  }
+
+  return `${appBase}${path.replace(/^\/+/, "")}`;
+}
+
 type DetailPage = {
   slug: string;
   label: Record<Lang, string>;
@@ -900,7 +915,7 @@ function App() {
   const { lang, setLang } = useLanguage();
 
   return (
-    <Router>
+    <Router basename={routerBasename}>
       <Routes>
         <Route path="/" element={<Home lang={lang} setLang={setLang} />} />
         <Route path="/work/:slug" element={<Detail lang={lang} setLang={setLang} />} />
@@ -920,7 +935,7 @@ function Header({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) => void }
       </Link>
       <nav className="top-nav" aria-label="Primary navigation">
         {copy.nav.map((item) => (
-          <a key={item} href={item === copy.nav[3] ? "mailto:2743736159@qq.com" : "/#map"}>
+          <a key={item} href={item === copy.nav[3] ? "mailto:2743736159@qq.com" : `${appBase}#map`}>
             {item}
           </a>
         ))}
@@ -996,7 +1011,7 @@ function Home({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) => void }) 
             to={`/work/${item.to}`}
             aria-label={item.label[lang]}
           >
-            <img src={`/assets/stickers/${item.image}`} alt="" />
+            <img src={publicAsset(`/assets/stickers/${item.image}`)} alt="" />
             <span>{item.label[lang]}</span>
           </Link>
         ))}
@@ -1013,7 +1028,7 @@ function VibeCodingSticker({ lang }: { lang: Lang }) {
 
   return (
     <figure className="vibe-coding-sticker" aria-label={label}>
-      <img className="vibe-coding-image" src="/assets/stickers/withai.png" alt="" />
+      <img className="vibe-coding-image" src={publicAsset("/assets/stickers/withai.png")} alt="" />
       <figcaption>{label}</figcaption>
     </figure>
   );
@@ -1090,7 +1105,7 @@ function SelfIntroGallery({ photos }: { photos: string[] }) {
     <aside className="self-sticker-gallery" aria-label="Graduation sticker collage">
       {photos.map((photo, index) => (
         <figure className="self-sticker-card" key={photo}>
-          <img src={photo} alt={`Graduation sticker ${index + 1}`} />
+          <img src={publicAsset(photo)} alt={`Graduation sticker ${index + 1}`} />
         </figure>
       ))}
     </aside>
@@ -1111,10 +1126,10 @@ function EducationSection({ education, lang }: { education: NonNullable<DetailPa
           <div className="edu-logo-badge">
             {item.url ? (
               <a href={item.url} target="_blank" rel="noopener noreferrer" title={`Visit ${item.school} official website`}>
-                <img src={item.logo} alt={`${item.school} logo`} />
+                <img src={publicAsset(item.logo)} alt={`${item.school} logo`} />
               </a>
             ) : (
-              <img src={item.logo} alt={`${item.school} logo`} />
+              <img src={publicAsset(item.logo)} alt={`${item.school} logo`} />
             )}
           </div>
           <div className="education-heading">
@@ -1191,9 +1206,9 @@ function MediaSlot({
     <div className={`${prefix}-media-slot ${prefix}-media-${mediaType}`}>
       {mediaSrc ? (
         mediaType === "video" ? (
-          <video src={mediaSrc} controls muted loop playsInline preload="metadata" />
+          <video src={publicAsset(mediaSrc)} controls muted loop playsInline preload="metadata" />
         ) : (
-          <img src={mediaSrc} alt={mediaLabel} />
+          <img src={publicAsset(mediaSrc)} alt={mediaLabel} />
         )
       ) : (
         <>
@@ -1323,7 +1338,7 @@ function AwardsSkillsSection({
           <p>Education Notes</p>
           <h2>Awards, honors, and technical toolkit</h2>
         </div>
-        <img src="/assets/stickers/reading.png" alt="" />
+        <img src={publicAsset("/assets/stickers/reading.png")} alt="" />
       </div>
 
       {awards && awards.length > 0 && (
