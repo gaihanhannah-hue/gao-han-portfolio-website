@@ -1072,12 +1072,15 @@ html:lang(zh) .contact-item {
 .coding-page .detail-hero,
 .life-hobbies-page .detail-hero {
   position: relative;
+  grid-template-columns: 1fr;
 }
 
 .pid-control-page .detail-copy,
 .coding-page .detail-copy,
 .life-hobbies-page .detail-copy {
   position: relative;
+  max-width: none;
+  padding-right: 0;
 }
 
 .pid-control-page .detail-copy::before,
@@ -1259,7 +1262,13 @@ html:lang(zh) .contact-item {
 }
 
 .coding-experience-copy {
-  padding: 34px 36px 30px;
+  padding: 34px 36px 24px 36px;
+  max-width: none;
+}
+
+.coding-experience-copy p,
+.coding-experience-copy ul {
+  max-width: 100%;
 }
 
 .coding-kicker {
