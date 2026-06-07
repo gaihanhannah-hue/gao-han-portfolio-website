@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   Link,
@@ -28,6 +28,11 @@ function publicAsset(path?: string) {
   return `${appBase}${path.replace(/^\/+/, "")}`;
 }
 
+const selfIntroAudioSrc: Record<Lang, string> = {
+  en: new URL("../photo_video/英文自我介绍.m4a", import.meta.url).href,
+  zh: new URL("../photo_video/中文自我介绍.m4a", import.meta.url).href,
+};
+
 type DetailPage = {
   slug: string;
   label: Record<Lang, string>;
@@ -46,10 +51,10 @@ type DetailPage = {
   accent: string;
   roboticsSections?: Array<{
     period: string;
-    role: string;
-    title: string;
-    body: string;
-    bullets: string[];
+    role: Record<Lang, string>;
+    title: Record<Lang, string>;
+    body: Record<Lang, string>;
+    bullets: Record<Lang, string[]>;
     mediaType: "video" | "image";
     mediaSrc?: string;
     mediaLabel: string;
@@ -59,10 +64,10 @@ type DetailPage = {
   }>;
   codingSections?: Array<{
     period: string;
-    role: string;
-    title: string;
-    body: string;
-    bullets: string[];
+    role: Record<Lang, string>;
+    title: Record<Lang, string>;
+    body: Record<Lang, string>;
+    bullets: Record<Lang, string[]>;
     mediaType: "video" | "image";
     mediaSrc?: string;
     mediaLabel: string;
@@ -72,10 +77,10 @@ type DetailPage = {
   }>;
   agentsSections?: Array<{
     period: string;
-    role: string;
-    title: string;
-    body: string;
-    bullets: string[];
+    role: Record<Lang, string>;
+    title: Record<Lang, string>;
+    body: Record<Lang, string>;
+    bullets: Record<Lang, string[]>;
     mediaType: "video" | "image";
     mediaSrc?: string;
     mediaLabel: string;
@@ -85,10 +90,23 @@ type DetailPage = {
   }>;
   pidSections?: Array<{
     period: string;
-    role: string;
-    title: string;
-    body: string;
-    bullets: string[];
+    role: Record<Lang, string>;
+    title: Record<Lang, string>;
+    body: Record<Lang, string>;
+    bullets: Record<Lang, string[]>;
+    mediaType: "video" | "image";
+    mediaSrc?: string;
+    mediaLabel: string;
+    mediaType2?: "video" | "image";
+    mediaSrc2?: string;
+    mediaLabel2?: string;
+  }>;
+  hobbySections?: Array<{
+    period: string;
+    role: Record<Lang, string>;
+    title: Record<Lang, string>;
+    body: Record<Lang, string>;
+    bullets: Record<Lang, string[]>;
     mediaType: "video" | "image";
     mediaSrc?: string;
     mediaLabel: string;
@@ -108,14 +126,14 @@ type DetailPage = {
     desc: Record<Lang, string>;
   }>;
   education?: Array<{
-    school: string;
-    degree: string;
-    major: string;
+    school: Record<Lang, string>;
+    degree: Record<Lang, string>;
+    major: Record<Lang, string>;
     logo: string;
     url?: string;
     period: string;
-    research: string;
-    courses: string[];
+    research: Record<Lang, string>;
+    courses: Record<Lang, string[]>;
     gpa: string;
   }>;
 };
@@ -178,36 +196,37 @@ const pages: DetailPage[] = [
     ],
     education: [
       {
-        school: "The Chinese University of Hong Kong",
-        degree: "Master",
-        major: "Mechanical and Automation Engineering",
+        school: { en: "The Chinese University of Hong Kong", zh: "香港中文大学" },
+        degree: { en: "Master", zh: "硕士" },
+        major: { en: "Mechanical and Automation Engineering", zh: "机械与自动化工程" },
         logo: "/assets/self-introduction/cuhk-logo.png",
         url: "https://www.cuhk.edu.hk",
         period: "2025.09 - 2026.06",
-        research: "AI Agent R&D for image generation and PPT generation under an AI Agent field supervisor.",
-        courses: [
-          "Computer Vision",
-          "Control and Industrial Automation",
-          "Computer-Aided Design and Manufacturing",
-          "Advanced Robotics",
-        ],
+        research: {
+          en: "AI Agent R&D for image generation and PPT generation under an AI Agent field supervisor.",
+          zh: "在 AI Agent 领域导师指导下，从事图像生成与 PPT 生成的 AI Agent 研发。",
+        },
+        courses: {
+          en: ["Computer Vision", "Control and Industrial Automation", "Computer-Aided Design and Manufacturing", "Advanced Robotics"],
+          zh: ["计算机视觉", "控制与工业自动化", "计算机辅助设计与制造", "高级机器人学"],
+        },
         gpa: "GPA: In progress",
       },
       {
-        school: "Beijing University of Chemical Technology",
-        degree: "Bachelor",
-        major: "Automation",
+        school: { en: "Beijing University of Chemical Technology", zh: "北京化工大学" },
+        degree: { en: "Bachelor", zh: "学士" },
+        major: { en: "Automation", zh: "自动化" },
         logo: "/assets/self-introduction/buct-logo.png",
         url: "https://www.buct.edu.cn",
         period: "2021.09 - 2025.06",
-        research: "Automation, robot control, AI applications, and intelligent mobile robot systems.",
-        courses: [
-          "Automatic Control Theory",
-          "Artificial Intelligence Application",
-          "Robotics Engineering",
-          "Circuit Theory",
-          "Python/C Programming",
-        ],
+        research: {
+          en: "Automation, robot control, AI applications, and intelligent mobile robot systems.",
+          zh: "自动化、机器人控制、人工智能应用与智能移动机器人系统。",
+        },
+        courses: {
+          en: ["Automatic Control Theory", "Artificial Intelligence Application", "Robotics Engineering", "Circuit Theory", "Python/C Programming"],
+          zh: ["自动控制原理", "人工智能应用", "机器人工程学", "电路原理", "Python/C 程序设计"],
+        },
         gpa: "GPA: 86/100",
       },
     ],
@@ -371,50 +390,51 @@ const pages: DetailPage[] = [
     roboticsSections: [
       {
         period: "2024.04 - 2024.10",
-        role: "Chinese Academy of Sciences | Research Assistant",
-        title: "Humanoid Robot Control & Simulation",
-        body: "Worked on humanoid robot motion control as a research assistant, focusing on reinforcement learning environments and physics simulation for stable walking and jumping behaviors.",
-        bullets: [
-          "Built and configured reinforcement learning environments on Linux.",
-          "Completed humanoid robot simulation debugging in Isaac Gym and MuJoCo.",
-          "Compiled and tested WPC/MBC control code for walking and jumping control.",
-        ],
-        mediaType: "video",
-        mediaLabel: "Humanoid walking simulation",
-        mediaType2: "video",
-        mediaLabel2: "Humanoid jumping control demo",
+        role: { en: "CAS | Research Assistant", zh: "中国科学院 | 科研助理" },
+        title: { en: "Humanoid Robot Control & Simulation", zh: "人形机器人控制与仿真" },
+        body: { en: "Worked on humanoid robot motion control as a research assistant, focusing on reinforcement learning environments and physics simulation for stable walking and jumping behaviors.", zh: "作为科研助理从事人形机器人运动控制研究，聚焦强化学习环境与物理仿真，实现稳定的行走与跳跃行为。" },
+        bullets: {
+          en: ["Built and configured reinforcement learning environments on Linux.", "Completed humanoid robot simulation debugging in Isaac Gym and MuJoCo.", "Compiled and tested WPC/MBC control code for walking and jumping control."],
+          zh: ["Built and configured reinforcement learning environments on Linux.", "Completed humanoid robot simulation debugging in Isaac Gym and MuJoCo.", "Compiled and tested WPC/MBC control code for walking and jumping control."],
+        },
+        mediaType: "image",
+        mediaSrc: "/assets/cas-openloong-original.png",
+        mediaLabel: "Fig. 1 — Original OpenLoong humanoid robot model in Isaac Gym simulation",
+        mediaType2: "image",
+        mediaSrc2: "/assets/cas-model-replaced.png",
+        mediaLabel2: "Fig. 2 — Custom model replacement for WPC/MBC walking & jumping control",
       },
       {
         period: "2024.11 - 2025.05",
-        role: "Graduation Project | Project Lead",
-        title: "Serpentine Robot Reinforcement Learning",
-        body: "Led the simulation and optimization project for a serpentine mobile robot, connecting SolidWorks mechanical modeling, MuJoCo physics simulation, and reinforcement learning based motion strategy design.",
-        bullets: [
-          "Built the MuJoCo simulation environment on Ubuntu.",
-          "Converted SolidWorks mechanical models into XML simulation assets.",
-          "Combined PPO, SAC, DDPG, genetic optimization, and Bayesian optimization for motion control.",
-        ],
+        role: { en: "Graduation Project | Project Lead", zh: "毕业设计 | 项目负责人" },
+        title: { en: "Serpentine Robot Reinforcement Learning", zh: "蛇形机器人强化学习" },
+        body: { en: "Led the simulation and optimization project for a serpentine mobile robot, connecting SolidWorks mechanical modeling, MuJoCo physics simulation, and reinforcement learning based motion strategy design.", zh: "主导蛇形移动机器人的仿真与优化项目，打通 SolidWorks 机械建模、MuJoCo 物理仿真与基于强化学习的运动策略设计。" },
+        bullets: {
+          en: ["Built the MuJoCo simulation environment on Ubuntu.", "Converted SolidWorks mechanical models into XML simulation assets.", "Combined PPO, SAC, DDPG, genetic optimization, and Bayesian optimization for motion control."],
+          zh: ["Built the MuJoCo simulation environment on Ubuntu.", "Converted SolidWorks mechanical models into XML simulation assets.", "Combined PPO, SAC, DDPG, genetic optimization, and Bayesian optimization for motion control."],
+        },
         mediaType: "video",
-        mediaSrc: "/assets/serpentine-robot.mp4",
-        mediaLabel: "Serpentine robot simulation demo",
-        mediaType2: "image",
-        mediaLabel2: "MuJoCo simulation environment",
+        mediaSrc: "/assets/serpentine-crawl.mp4",
+        mediaLabel: "Fig. 1 — Serpentine robot crawling at fixed 1.5× wavelength on structured ground",
+        mediaType2: "video",
+        mediaSrc2: "/assets/serpentine-obstacle.mp4",
+        mediaLabel2: "Fig. 2 — Autonomous obstacle avoidance on unstructured terrain",
       },
       {
         period: "2025.09 - 2025.12",
-        role: "Agibot | Algorithm Simulation Intern",
-        title: "Dexterous Hand Control & Humanoid Simulation Support",
-        body: "Worked on dexterous hand simulation and robot control communication, while supporting simulation workflows for humanoid robot scenarios.",
-        bullets: [
-          "Built a dexterous hand simulation model based on Sim-MuJoCo.",
-          "Coordinated ROS 2 communication with an MC controller for command and state feedback.",
-          "Optimized communication efficiency and control parameters for stable scenario interaction.",
-        ],
+        role: { en: "Agibot | Algorithm Simulation Intern", zh: "智元机器人 | 算法仿真实习生" },
+        title: { en: "Dexterous Hand Control & Humanoid Simulation Support", zh: "灵巧手控制与人形机器人仿真" },
+        body: { en: "Worked on dexterous hand simulation and robot control communication, while supporting simulation workflows for humanoid robot scenarios.", zh: "从事灵巧手仿真与机器人控制通信，同时支持人形机器人场景的仿真工作流。" },
+        bullets: {
+          en: ["Built a dexterous hand simulation model based on Sim-MuJoCo.", "Coordinated ROS 2 communication with an MC controller for command and state feedback.", "Optimized communication efficiency and control parameters for stable scenario interaction."],
+          zh: ["Built a dexterous hand simulation model based on Sim-MuJoCo.", "Coordinated ROS 2 communication with an MC controller for command and state feedback.", "Optimized communication efficiency and control parameters for stable scenario interaction."],
+        },
         mediaType: "image",
-        mediaSrc: "/assets/agibot.png",
-        mediaLabel: "Dexterous hand simulation — Agibot",
+        mediaSrc: "/assets/agibot-motion-control.jpg",
+        mediaLabel: "Fig. 1 — Agibot humanoid robot motion control simulation",
         mediaType2: "image",
-        mediaLabel2: "Humanoid simulation support",
+        mediaSrc2: "/assets/agibot-dexterous-hand.png",
+        mediaLabel2: "Fig. 2 — Dexterous hand simulation model in Sim-MuJoCo",
       },
     ],
     accent: "green",
@@ -489,71 +509,52 @@ const pages: DetailPage[] = [
     ],
     agentsSections: [
       {
-        period: "2026.03 - Present",
-        role: "AI Agent Developer",
-        title: "Education Agent — RAG + Document-to-PPT Pipeline",
-        body: "Built a locally deployed, private RAG-based Education Agent. Users query an ingested knowledge base, upload documents, and receive auto-generated structured PPT presentations. The pipeline integrates LangChain for retrieval and LLM/VLM for content generation, running entirely in a private repository for data-sensitive educational use cases.",
-        bullets: [
-          "LangChain RAG pipeline with local knowledge base ingestion and semantic retrieval",
-          "LLM/VLM-powered document-to-PPT generation as structured output",
-          "Modular orchestration layer for flexible workflow control",
-          "Privately deployed — designed for education scenarios where data privacy matters",
-        ],
+        period: "2025.11 - 2026.05",
+        role: { en: "AI Agent Developer", zh: "AI Agent 开发工程师" },
+        title: { en: "Education Agent — RAG + Document-to-PPT Pipeline", zh: "教育类 Agent — RAG + 文档转 PPT 管线" },
+        body: { en: "Built a locally deployed, private RAG-based Education Agent. Users query an ingested knowledge base, upload documents, and receive auto-generated structured PPT presentations. The pipeline integrates LangChain for retrieval and LLM/VLM for content generation, running entirely in a private repository for data-sensitive educational use cases.", zh: "搭建了本地化部署的私有 RAG 教育类 Agent。用户可基于已摄入的知识库进行问答，上传文档后自动生成结构化 PPT 演示文稿。管线整合 LangChain 进行检索、LLM/VLM 进行内容生成，整套系统运行在私有化仓库中，面向对数据隐私有要求的教育场景。" },
+        bullets: {
+          en: ["LangChain RAG pipeline with local knowledge base ingestion and semantic retrieval", "LLM/VLM-powered document-to-PPT generation as structured output", "Modular orchestration layer for flexible workflow control", "Privately deployed — designed for education scenarios where data privacy matters"],
+          zh: ["LangChain RAG pipeline with local knowledge base ingestion and semantic retrieval", "LLM/VLM-powered document-to-PPT generation as structured output", "Modular orchestration layer for flexible workflow control", "Privately deployed — designed for education scenarios where data privacy matters"],
+        },
         mediaType: "image",
-        mediaSrc: "/assets/agent-local.png",
-        mediaLabel: "RAG knowledge base Q&A interface",
+        mediaSrc: "/assets/agent-qa-local.png",
+        mediaLabel: "Fig. 1 — Local RAG-based knowledge base Q&A: LangChain retrieval + LLM/VLM generation",
         mediaType2: "image",
-        mediaLabel2: "Document-to-PPT generation output",
+        mediaSrc2: "/assets/agent-ppt-local.png",
+        mediaLabel2: "Fig. 2 — Auto-generated structured PPT from uploaded documents via LLM/VLM pipeline",
       },
       {
-        period: "2025.11 - Present",
-        role: "Agent Architect & Full-Stack Developer",
-        title: "AI-Assisted Development & Industry Agent Practice",
-        body: "End-to-end AI-assisted development spanning Agent architecture design, full-stack delivery, and industry platform deployment. Built this portfolio website using Claude Code and Cursor under my architectural direction — defining visual identity, sticker-map navigation, and bilingual content strategy while the AI handled implementation. Applied MCP (Model Context Protocol) to build custom servers connecting LLMs to external tools, APIs, and data sources for tool-augmented workflows. On the industry side, developed AI Agents on the poffices.AI platform — building custom Blocks, configuring node-based workflow logic, and embedding Python scripts for business rules with online optimization.",
-        bullets: [
-          "MCP (Model Context Protocol) — custom MCP servers connecting LLMs to external tools & APIs",
-          "AI-assisted full-stack delivery: Claude Code + Cursor → React/TypeScript production apps",
-          "poffices.AI platform: custom Blocks, node-based workflows, Python business logic scripts",
-          "Composable Agent skills: tool-use pipelines, image generation, PPT generation, web deployment",
-          "Architecture ownership: design decisions, component structure, code-level refinement across projects",
-        ],
+        period: "2026.05 - 2026.07",
+        role: { en: "Industry AI Agent Developer", zh: "行业 AI Agent 开发工程师" },
+        title: { en: "SENGITAL — Industry AI Agent Development Intern", zh: "SENGITAL — 行业 AI Agent 开发实习" },
+        body: { en: "Developed industry-specific Agents on poffices.AI, contributing to visual workflow orchestration, modular feature packaging and agile low-code application delivery. Built custom Blocks and configured node-based logic for business scenarios, improving workflow reuse and scenario-specific processing efficiency. Embedded Python scripts for complex business logic, and supported scenario adaptation plus online performance optimization for scalable AI Agent deployment.", zh: "在 poffices.AI 平台上开发面向行业的 AI Agent，参与可视化工作流编排、模块化功能封装与敏捷低代码应用交付。构建自定义 Blocks 并配置面向业务场景的节点式逻辑，提升工作流复用性与场景化处理效率。嵌入 Python 脚本实现复杂业务逻辑，支持场景适配与线上性能优化。" },
+        bullets: {
+          en: ["Developed industry Agents on poffices.AI — visual workflow orchestration & low-code delivery", "Built custom Blocks & node-based logic for business scenarios, improving workflow reuse", "Embedded Python scripts for complex business rules with scenario adaptation", "Online performance optimization for scalable AI Agent deployment"],
+          zh: ["Developed industry Agents on poffices.AI — visual workflow orchestration & low-code delivery", "Built custom Blocks & node-based logic for business scenarios, improving workflow reuse", "Embedded Python scripts for complex business rules with scenario adaptation", "Online performance optimization for scalable AI Agent deployment"],
+        },
         mediaType: "image",
-        mediaSrc: "/assets/stickers/agents.png",
-        mediaLabel: "Agent architecture — MCP + tool-use workflow",
+        mediaSrc: "/assets/agent-poffices-workflow.png",
+        mediaLabel: "Fig. 1 — poffices.AI visual workflow orchestration: Agent pipeline design",
         mediaType2: "image",
-        mediaSrc2: "/assets/agent-poffices.png",
-        mediaLabel2: "poffices.AI — Agent Blocks & workflow",
+        mediaSrc2: "/assets/agent-poffices-deploy.png",
+        mediaLabel2: "Fig. 2 — Agent deployment interface: modular Blocks & node-based logic",
       },
       {
         period: "2025.09 - 2025.12",
-        role: "AIoT System Developer",
-        title: "AIoT Smart Bathroom — LLM-Driven Environmental Control",
-        body: "Built an STM32-based smart bathroom integrating temperature, humidity, PIR, CO₂, PM2.5, and water leakage sensors. An LLM decision layer interprets multi-sensor context holistically — reasoning across time-series patterns to trigger coordinated responses like exhaust activation, valve adjustment, or alerts. Users converse with the system in natural language, and the LLM provides contextual answers grounded in real-time sensor data.",
-        bullets: [
-          "STM32 sensor array with cloud backend and real-time web dashboard visualization",
-          "LLM reasoning layer replaces hard-coded rules — understands multi-sensor context",
-          "Autonomous coordinated responses: exhaust fans, water valves, alert notifications",
-          "Natural-language interaction: users ask questions, LLM answers from live sensor data",
-        ],
+        role: { en: "AIoT System Developer", zh: "AIoT 系统开发者" },
+        title: { en: "AIoT Smart Bathroom — LLM-Driven Environmental Control", zh: "AIoT 智能浴室 — 大模型驱动环境调控" },
+        body: { en: "Built an STM32-based smart bathroom integrating temperature, humidity, PIR, CO₂, PM2.5, and water leakage sensors. An LLM decision layer interprets multi-sensor context holistically — reasoning across time-series patterns to trigger coordinated responses like exhaust activation, valve adjustment, or alerts. Users converse with the system in natural language, and the LLM provides contextual answers grounded in real-time sensor data.", zh: "Built an STM32-based smart bathroom integrating temperature, humidity, PIR, CO₂, PM2.5, and water leakage sensors. An LLM decision layer interprets multi-sensor context holistically — reasoning across time-series patterns to trigger coordinated responses like exhaust activation, valve adjustment, or alerts. Users converse with the system in natural language, and the LLM provides contextual answers grounded in real-time sensor data." },
+        bullets: {
+          en: ["STM32 sensor array with cloud backend and real-time web dashboard visualization", "LLM reasoning layer replaces hard-coded rules — understands multi-sensor context", "Autonomous coordinated responses: exhaust fans, water valves, alert notifications", "Natural-language interaction: users ask questions, LLM answers from live sensor data"],
+          zh: ["STM32 sensor array with cloud backend and real-time web dashboard visualization", "LLM reasoning layer replaces hard-coded rules — understands multi-sensor context", "Autonomous coordinated responses: exhaust fans, water valves, alert notifications", "Natural-language interaction: users ask questions, LLM answers from live sensor data"],
+        },
         mediaType: "image",
-        mediaLabel: "Sensor data — real-time dashboard",
+        mediaSrc: "/assets/aiot-esp32-wiring.png",
+        mediaLabel: "Fig. 1 — ESP32 sensor array wiring diagram: temperature, humidity, PIR, CO₂, PM2.5",
         mediaType2: "image",
-        mediaLabel2: "LLM natural-language conversation UI",
-      },
-      {
-        period: "2025.11 - 2026.06",
-        role: "R&D Lead (Supervisor-Led)",
-        title: "CUHK — Multimodal Agent R&D",
-        body: "Led architecture work on multimodal Agent systems under faculty supervision. Integrated LLM, VLM, YOLO, and OpenCV for perception, LangChain RAG for knowledge retrieval, and Ray for distributed task scheduling. Delivered image generation and PPT generation Agents as composable pipeline modules.",
-        bullets: [
-          "Integrated LLM + VLM + YOLO + OpenCV for multimodal perception pipeline",
-          "LangChain RAG + Ray distributed scheduling for scalable Agent task execution",
-          "Composable Agent modules: image generation, PPT generation as pipeline components",
-        ],
-        mediaType: "image",
-        mediaLabel: "Multimodal perception pipeline",
-        mediaType2: "image",
-        mediaLabel2: "Agent module composition diagram",
+        mediaSrc2: "/assets/aiot-dashboard.png",
+        mediaLabel2: "Fig. 2 — Real-time AIoT dashboard: sensor visualization & LLM decision interface",
       },
     ],
     accent: "cyan",
@@ -613,51 +614,51 @@ const pages: DetailPage[] = [
     pidSections: [
       {
         period: "2025.10 - 2025.12",
-        role: "Master's Group Project",
-        title: "UAV Search & Rescue — Adaptive PID + YOLO Detection",
-        body: "Built a quadrotor UAV simulation in MATLAB/Simulink for search-and-rescue missions. Designed a cascaded PID controller (position → velocity → attitude loops) for stable hover, autonomous takeoff/landing, and waypoint navigation. Integrated Gain Scheduling + PSO adaptive tuning so PID gains auto-adjust based on flight phase and wind conditions. Trained a YOLO pedestrian detector on aerial-view data to identify survivors and trigger loiter-and-report behavior.",
-        bullets: [
-          "Cascaded PID: position → velocity → attitude loops in MATLAB/Simulink",
-          "Gain Scheduling + PSO adaptive tuning — gains adjust in real-time to flight phase & wind",
-          "Integrated radar, IMU, barometer, GPS sensor models for state estimation",
-          "YOLO-based pedestrian detection on custom aerial dataset → mission planner feedback",
-        ],
+        role: { en: "Master's Group Project", zh: "硕士课程小组项目" },
+        title: { en: "UAV Search & Rescue — Adaptive PID + YOLO Detection", zh: "无人机搜救 — 自适应 PID + YOLO 行人检测" },
+        body: { en: "Built a quadrotor UAV simulation in MATLAB/Simulink for search-and-rescue missions. Designed a cascaded PID controller (position → velocity → attitude loops) for stable hover, autonomous takeoff/landing, and waypoint navigation. Integrated Gain Scheduling + PSO adaptive tuning so PID gains auto-adjust based on flight phase and wind conditions. Trained a YOLO pedestrian detector on aerial-view data to identify survivors and trigger loiter-and-report behavior.", zh: "Built a quadrotor UAV simulation in MATLAB/Simulink for search-and-rescue missions. Designed a cascaded PID controller (position → velocity → attitude loops) for stable hover, autonomous takeoff/landing, and waypoint navigation. Integrated Gain Scheduling + PSO adaptive tuning so PID gains auto-adjust based on flight phase and wind conditions. Trained a YOLO pedestrian detector on aerial-view data to identify survivors and trigger loiter-and-report behavior." },
+        bullets: {
+          en: ["Cascaded PID: position → velocity → attitude loops in MATLAB/Simulink", "Gain Scheduling + PSO adaptive tuning — gains adjust in real-time to flight phase & wind", "Integrated radar, IMU, barometer, GPS sensor models for state estimation", "YOLO-based pedestrian detection on custom aerial dataset → mission planner feedback"],
+          zh: ["Cascaded PID: position → velocity → attitude loops in MATLAB/Simulink", "Gain Scheduling + PSO adaptive tuning — gains adjust in real-time to flight phase & wind", "Integrated radar, IMU, barometer, GPS sensor models for state estimation", "YOLO-based pedestrian detection on custom aerial dataset → mission planner feedback"],
+        },
         mediaType: "video",
-        mediaSrc: "/assets/drone-pid.mp4",
-        mediaLabel: "UAV flight control — Simulink simulation",
-        mediaType2: "video",
-        mediaSrc2: "/assets/drone-pid.mp4",
-        mediaLabel2: "YOLO pedestrian detection — aerial view",
+        mediaSrc: "/assets/drone-search-rescue.mp4",
+        mediaLabel: "Fig. 1 — UAV autonomous search-and-rescue flight simulation in MATLAB/Simulink",
+        mediaType2: "image",
+        mediaSrc2: "/assets/drone-path-planning.png",
+        mediaLabel2: "Fig. 2 — UAV path planning: waypoint navigation & autonomous trajectory generation",
       },
       {
         period: "2025.03 - 2025.06",
-        role: "Industrial Control Lab",
-        title: "Industrial Process Control — Water Tank & Boiler Regulation",
-        body: "Hands-on PID control on physical water tank and boiler systems with real sensors and actuators. Performed system identification via step-response testing, applied Ziegler-Nichols tuning rules, and refined gains through iterative closed-loop testing. Compared P, PI, and PID modes on steady-state error, overshoot, settling time, and disturbance rejection.",
-        bullets: [
-          "Physical water tank & boiler systems with real sensors and actuators",
-          "System identification via step-response → plant transfer functions",
-          "Ziegler-Nichols tuning + iterative closed-loop gain refinement",
-          "Compared P / PI / PID: steady-state error, overshoot, settling time, disturbance rejection",
-        ],
+        role: { en: "Industrial Control Lab", zh: "工业控制实验室" },
+        title: { en: "Industrial Process Control — Water Tank & Boiler Regulation", zh: "工业过程控制 — 水箱液位与锅炉温度调控" },
+        body: { en: "Hands-on PID control on physical water tank and boiler systems with real sensors and actuators. Performed system identification via step-response testing, applied Ziegler-Nichols tuning rules, and refined gains through iterative closed-loop testing. Compared P, PI, and PID modes on steady-state error, overshoot, settling time, and disturbance rejection.", zh: "在真实水箱液位和锅炉温度系统上操作 PID 控制器，使用真实传感器和执行器。通过阶跃响应测试进行系统辨识，应用 Ziegler-Nichols 整定法则获取初始 PID 参数，再通过迭代闭环测试优化增益。对比 P、PI、PID 三种控制模式的稳态误差、超调量、调节时间和抗扰性能。" },
+        bullets: {
+          en: ["Physical water tank & boiler systems with real sensors and actuators", "System identification via step-response → plant transfer functions", "Ziegler-Nichols tuning + iterative closed-loop gain refinement", "Compared P / PI / PID: steady-state error, overshoot, settling time, disturbance rejection"],
+          zh: ["Physical water tank & boiler systems with real sensors and actuators", "System identification via step-response → plant transfer functions", "Ziegler-Nichols tuning + iterative closed-loop gain refinement", "Compared P / PI / PID: steady-state error, overshoot, settling time, disturbance rejection"],
+        },
         mediaType: "image",
-        mediaSrc: "/assets/pid-watertank.png",
-        mediaLabel: "Water tank / boiler PID control setup",
+        mediaSrc: "/assets/pid-liquid-temp.png",
+        mediaLabel: "Fig. 1 — PID-controlled liquid level & water temperature simulation",
+        mediaType2: "image",
+        mediaSrc2: "/assets/pid-oscillation.png",
+        mediaLabel2: "Fig. 2 — PID parameter oscillation analysis: system response under gain variation",
       },
       {
         period: "2024.09 - 2025.01",
-        role: "Course Project",
-        title: "MATLAB PID Simulation & Transfer Function Analysis",
-        body: "Systematic controller design in MATLAB. Modeled dynamic systems (first-order, second-order, time-delay) using transfer functions and state-space. Performed open-loop analysis (root locus, Bode, Nyquist) for stability margins, then designed PID compensators to meet target specs. Compared Ziegler-Nichols, Cohen-Coon, and optimization-based tuning, visualizing each gain term's effect on response.",
-        bullets: [
-          "Transfer function & state-space modeling for 1st/2nd-order + time-delay systems",
-          "Open-loop analysis: root locus, Bode plots, Nyquist diagrams for stability margins",
-          "PID compensator design comparing Ziegler-Nichols, Cohen-Coon, optimization-based tuning",
-          "Visualized Kp/Ki/Kd effects on rise time, overshoot, steady-state error, oscillation damping",
-        ],
+        role: { en: "Course Project", zh: "课程项目" },
+        title: { en: "MATLAB PID Simulation & Transfer Function Analysis", zh: "MATLAB PID 仿真与传递函数分析" },
+        body: { en: "Systematic controller design in MATLAB. Modeled dynamic systems (first-order, second-order, time-delay) using transfer functions and state-space. Performed open-loop analysis (root locus, Bode, Nyquist) for stability margins, then designed PID compensators to meet target specs. Compared Ziegler-Nichols, Cohen-Coon, and optimization-based tuning, visualizing each gain term's effect on response.", zh: "在 MATLAB 中进行系统化控制器设计与分析。使用传递函数和状态空间对各种动态系统（一阶、二阶、时滞）建模。进行开环分析（根轨迹、Bode 图、Nyquist 图）评估稳定裕度，然后设计 PID 补偿器以满足目标性能指标。比较 Ziegler-Nichols、Cohen-Coon 和基于优化的整定方法，可视化每个增益项对响应的影响。" },
+        bullets: {
+          en: ["Transfer function & state-space modeling for 1st/2nd-order + time-delay systems", "Open-loop analysis: root locus, Bode plots, Nyquist diagrams for stability margins", "PID compensator design comparing Ziegler-Nichols, Cohen-Coon, optimization-based tuning", "Visualized Kp/Ki/Kd effects on rise time, overshoot, steady-state error, oscillation damping"],
+          zh: ["Transfer function & state-space modeling for 1st/2nd-order + time-delay systems", "Open-loop analysis: root locus, Bode plots, Nyquist diagrams for stability margins", "PID compensator design comparing Ziegler-Nichols, Cohen-Coon, optimization-based tuning", "Visualized Kp/Ki/Kd effects on rise time, overshoot, steady-state error, oscillation damping"],
+        },
         mediaType: "image",
         mediaSrc: "/assets/pid-matlab.png",
-        mediaLabel: "MATLAB PID — Bode & step response analysis",
+        mediaLabel: "Fig. 1 — MATLAB PID compensator design: Bode plot, root locus & closed-loop step response",
+        mediaType2: "image",
+        mediaSrc2: "/assets/pid-matlab2.png",
+        mediaLabel2: "Fig. 2 — Ziegler-Nichols tuning comparison: setpoint tracking & disturbance rejection analysis",
       },
     ],
     accent: "coral",
@@ -724,64 +725,36 @@ const pages: DetailPage[] = [
     ],
     codingSections: [
       {
-        period: "2026.04 - Present",
-        role: "Full-Stack Developer & Architect",
-        title: "Portfolio Website — AI-Assisted Web Coding",
-        body: "Designed, architected, and shipped this fully responsive bilingual portfolio site using React, TypeScript, and CSS. The site features an interactive sticker-map navigation system, dynamic language switching, and a paper-texture tactile design language. Built with AI-assisted development tooling (Claude Code, Cursor) under my architectural direction — I focused on design decisions, component structure, and code-level refinement.",
-        bullets: [
-          "React + TypeScript single-page application with client-side routing",
-          "Fully bilingual (EN/ZH) content system with dynamic language switching",
-          "Responsive CSS layout adapting from desktop to mobile with sticker-map interaction",
-          "Paper-grain tactile visual identity with custom CSS variable-driven theming",
-          "AI-assisted development workflow: architecture design → AI implementation → manual refinement",
-        ],
-        mediaType: "image",
-        mediaSrc: "/assets/stickers/coding.png",
-        mediaLabel: "Portfolio website — sticker map",
-      },
-      {
-        period: "2025 - 2026",
-        role: "Full-Stack Developer",
-        title: "Full-Stack Web Applications — Frontend + Backend Projects",
-        body: "Built multiple full-stack web applications spanning React/TypeScript frontends, Node.js backend APIs, and database integrations. Projects include data visualization dashboards, content management systems, and real-time monitoring interfaces — each designed and delivered end-to-end from UI to deployment.",
-        bullets: [
-          "React + TypeScript frontend with component-driven architecture and responsive design",
-          "Node.js RESTful API backends with Express, handling auth, data validation, and business logic",
-          "Real-time data dashboards with WebSocket connections and chart visualizations",
-          "Database design and integration (MySQL, file-based storage) for persistent data layers",
-          "Independent project ownership from requirements to deployment",
-        ],
-        mediaType: "image",
-        mediaSrc: "/assets/stickers/withai.png",
-        mediaLabel: "AI-assisted full-stack development",
-      },
-      {
         period: "2024",
-        role: "Full-Stack + IoT Developer",
-        title: "WeChat Mini Program + Smart Car Cloud Control",
-        body: "Built a WeChat Mini Program as the remote control interface for an Arduino smart car, bridging mobile frontend, cloud backend, and embedded hardware into one integrated system. The mini program sends real-time motion commands via MQTT protocol and displays historical sensor data.",
-        bullets: [
-          "WeChat Mini Program frontend with WXML/WXSS for mobile remote control UI",
-          "Cloud backend with MQTT protocol bridging mobile commands to embedded hardware",
-          "Real-time bidirectional communication: commands down, sensor telemetry up",
-          "Cloud data logging with in-app historical visualization",
-        ],
+        role: { en: "Full-Stack + IoT Developer", zh: "全栈 + IoT 开发者" },
+        title: { en: "WeChat Mini Program + Smart Car Cloud Control", zh: "微信小程序 + 智能小车云端控制" },
+        body: { en: "Built a WeChat Mini Program as the remote control interface for an Arduino smart car, bridging mobile frontend, cloud backend, and embedded hardware into one integrated system. The mini program sends real-time motion commands via MQTT protocol and displays historical sensor data.", zh: "开发微信小程序作为 Arduino 智能小车的远程控制界面，将移动前端、云后端与嵌入式硬件打通为一体化系统。小程序通过 MQTT 协议发送实时运动指令并展示历史传感器数据。" },
+        bullets: {
+          en: ["WeChat Mini Program frontend with WXML/WXSS for mobile remote control UI", "Cloud backend with MQTT protocol bridging mobile commands to embedded hardware", "Real-time bidirectional communication: commands down, sensor telemetry up", "Cloud data logging with in-app historical visualization"],
+          zh: ["WeChat Mini Program frontend with WXML/WXSS for mobile remote control UI", "Cloud backend with MQTT protocol bridging mobile commands to embedded hardware", "Real-time bidirectional communication: commands down, sensor telemetry up", "Cloud data logging with in-app historical visualization"],
+        },
         mediaType: "image",
-        mediaLabel: "Mini program remote control interface screenshot",
+        mediaSrc: "/assets/coding-wechat-car.png",
+        mediaLabel: "Fig. 1 — WeChat Mini Program: MQTT-based remote control for Arduino smart car",
+        mediaType2: "image",
+        mediaSrc2: "/assets/coding-arduino-car.png",
+        mediaLabel2: "Fig. 2 — Arduino embedded smart car: ultrasonic + infrared sensor hardware setup",
       },
       {
         period: "2023",
-        role: "Desktop Application Developer",
-        title: "Supermarket Management System — C Language GUI App",
-        body: "Developed a full-featured desktop management application in C with a visual GUI, supporting user auth, product catalog browsing, shopping cart operations, and checkout. Modular data structures with file-based persistence for cross-session reliability.",
-        bullets: [
-          "C language with visual GUI framework for desktop application development",
-          "Modular data architecture: user, product, order data structures",
-          "Shopping cart with full CRUD operations and checkout flow",
-          "File-based data persistence for session-to-session continuity",
-        ],
+        role: { en: "Desktop Application Developer", zh: "桌面应用开发者" },
+        title: { en: "Supermarket Management System — C Language GUI App", zh: "超市管理系统 — C 语言 GUI 桌面应用" },
+        body: { en: "Developed a full-featured desktop management application in C with a visual GUI, supporting user auth, product catalog browsing, shopping cart operations, and checkout. Modular data structures with file-based persistence for cross-session reliability.", zh: "用 C 语言开发了功能完善的超市管理桌面应用，带有可视化图形界面。系统支持用户注册与登录、按分类浏览商品、购物车增删改、结算并计算总价。设计了模块化数据结构，通过文件持久化保存会话间数据。" },
+        bullets: {
+          en: ["C language with visual GUI framework for desktop application development", "Modular data architecture: user, product, order data structures", "Shopping cart with full CRUD operations and checkout flow", "File-based data persistence for session-to-session continuity"],
+          zh: ["C language with visual GUI framework for desktop application development", "Modular data architecture: user, product, order data structures", "Shopping cart with full CRUD operations and checkout flow", "File-based data persistence for session-to-session continuity"],
+        },
         mediaType: "image",
-        mediaLabel: "Supermarket system GUI screenshot",
+        mediaSrc: "/assets/coding-supermarket-login.png",
+        mediaLabel: "Fig. 1 — Supermarket system: user login & authentication interface",
+        mediaType2: "image",
+        mediaSrc2: "/assets/coding-supermarket-shop.png",
+        mediaLabel2: "Fig. 2 — Product catalog & shopping cart: browse, select, checkout flow",
       },
     ],
     accent: "lavender",
@@ -834,9 +807,59 @@ const pages: DetailPage[] = [
       zh: ["音乐", "旅行", "摄影", "运动", "创造"],
     },
     media: [
-      { en: "Guitar / bass playing video", zh: "吉他/贝斯弹奏视频" },
-      { en: "Travel & landscape photography", zh: "旅行风景摄影" },
-      { en: "Badminton / tennis moment", zh: "羽毛球/网球瞬间" },
+      { en: "Guitar playing video", zh: "吉他弹奏视频" },
+      { en: "Hiking & sports photos", zh: "登山运动照片" },
+      { en: "Photography collection", zh: "摄影作品" },
+    ],
+    hobbySections: [
+      {
+        period: "4 Years & Counting",
+        role: { en: "Musician", zh: "音乐爱好者" },
+        title: { en: "Guitar & Bass — Playing Music", zh: "吉他 & 贝斯 — 弹琴玩音乐" },
+        body: { en: "I have been playing guitar for about four years, and picked up bass along the way. I enjoy fingerstyle guitar, strumming through pop and folk songs, and occasionally singing along. Music is my go-to way to unwind — whether learning a new piece or just jamming with friends.", zh: "弹了四年左右的吉他，中途也摸了贝斯。喜欢指弹、弹唱流行和民谣，偶尔自弹自唱。音乐是我放空的方式——不管是练一首新曲子还是跟朋友即兴合奏。" },
+        bullets: {
+          en: ["Fingerstyle guitar — pop, folk, and original arrangements", "Bass guitar — rhythm section and groove fundamentals", "Regular practice: technique, repertoire, and improvisation"],
+          zh: ["Fingerstyle guitar — pop, folk, and original arrangements", "Bass guitar — rhythm section and groove fundamentals", "Regular practice: technique, repertoire, and improvisation"],
+        },
+        mediaType: "video",
+        mediaSrc: "/assets/guitar-playing.mp4",
+        mediaLabel: "Fig. 1 — Guitar fingerstyle performance",
+        mediaType2: "video",
+        mediaSrc2: "/assets/guitar-cover.mp4",
+        mediaLabel2: "Fig. 2 — Guitar vocal cover — pop & folk",
+      },
+      {
+        period: "Weekly",
+        role: { en: "Sports Enthusiast", zh: "运动爱好者" },
+        title: { en: "Hiking, Badminton & Tennis — Staying Active", zh: "登山、羽毛球 & 网球 — 保持运动" },
+        body: { en: "I stay active through a mix of outdoor and court sports. Hiking is my escape into nature — trails, peaks, and fresh air clear my mind. Badminton sharpens my reflexes and footwork, while tennis gives me the rhythm of rallying under the sun. Together, they keep me balanced and energized.", zh: "通过户外与球场运动的结合保持活力。登山是我融入自然的方式——山径、峰顶和新鲜空气让我头脑清醒。羽毛球锻炼反应速度与步法，网球则享受阳光下对拉的节奏感。两者让我保持平衡与精力充沛。" },
+        bullets: {
+          en: ["Hiking — regular trail hikes, nature exploration & peak bagging", "Badminton — fast-paced reflexes, footwork & doubles strategy", "Tennis — outdoor rally rhythm, baseline strokes & volley practice"],
+          zh: ["Hiking — regular trail hikes, nature exploration & peak bagging", "Badminton — fast-paced reflexes, footwork & doubles strategy", "Tennis — outdoor rally rhythm, baseline strokes & volley practice"],
+        },
+        mediaType: "image",
+        mediaSrc: "/assets/hiking1.jpg",
+        mediaLabel: "Fig. 1 — Hiking trails & mountain landscapes",
+        mediaType2: "image",
+        mediaSrc2: "/assets/hiking4.jpg",
+        mediaLabel2: "Fig. 2 — Summit views & outdoor adventure moments",
+      },
+      {
+        period: "Ongoing",
+        role: { en: "Photographer", zh: "摄影爱好者" },
+        title: { en: "Photography — Capturing Light & Moments", zh: "摄影 — 捕捉光影与瞬间" },
+        body: { en: "I bring a camera wherever I go. Photography trains my eye for composition, light, and detail — whether it is landscapes, street scenes, or the small candid moments that make a place feel real. This section is a growing gallery of my favorite captures.", zh: "走到哪里都带着相机。摄影训练了我对构图、光线和细节的敏感——无论是风景、街景还是那些让一个地方变得真实的细小瞬间。这个板块是我最喜欢的摄影作品的持续更新画廊。" },
+        bullets: {
+          en: ["Landscape & nature photography — mountains, coastlines, open skies", "Street & travel photography — urban textures, local life, cultural moments", "Composition & light awareness feeding back into design sensibility"],
+          zh: ["Landscape & nature photography — mountains, coastlines, open skies", "Street & travel photography — urban textures, local life, cultural moments", "Composition & light awareness feeding back into design sensibility"],
+        },
+        mediaType: "image",
+        mediaSrc: "/assets/photo1.jpg",
+        mediaLabel: "Fig. 1 — Landscape & nature photography",
+        mediaType2: "image",
+        mediaSrc2: "/assets/photo2.jpg",
+        mediaLabel2: "Fig. 2 — Travel & street photography moments",
+      },
     ],
     accent: "green",
   },
@@ -926,20 +949,24 @@ function App() {
 }
 
 function Header({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) => void }) {
-  const copy = homeCopy[lang];
+  const contact = homeCopy[lang].contact;
+  const emailLabel = lang === "en" ? "Email" : "邮箱";
+  const phoneLabel = lang === "en" ? "Phone" : "电话";
+  const email = contact.find((c) => c.label === emailLabel)?.value ?? "";
+  const phone = contact.find((c) => c.label === phoneLabel)?.value ?? "";
 
   return (
     <header className="site-header">
-      <Link className="brand-link" to="/" aria-label="Back to home">
-        GAO HAN
-      </Link>
-      <nav className="top-nav" aria-label="Primary navigation">
-        {copy.nav.map((item) => (
-          <a key={item} href={item === copy.nav[3] ? "mailto:2743736159@qq.com" : `${appBase}#map`}>
-            {item}
-          </a>
-        ))}
-      </nav>
+      <div className="header-info">
+        <Link className="brand-link" to="/" aria-label="Back to home">
+          GAO HAN
+        </Link>
+        <span className="header-contact">
+          <a href={`mailto:${email}`}>{email}</a>
+          <span className="header-sep">|</span>
+          <span>{phone}</span>
+        </span>
+      </div>
       <LanguageToggle lang={lang} setLang={setLang} />
     </header>
   );
@@ -1048,12 +1075,13 @@ function Detail({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) => void }
   const isCoding = page.slug === "coding";
   const isAgents = page.slug === "agents";
   const isPid = page.slug === "pid-control";
+  const isHobby = page.slug === "life-hobbies";
 
   return (
     <main
       className={`detail-page paper-grain accent-${page.accent} ${page.slug}-page ${isSelfIntro ? "self-intro-page" : ""} ${
         isRobotics ? "robotics-page" : ""
-      } ${isAgents ? "agents-page" : ""} ${isHonors ? "honors-page" : ""} ${isCoding ? "coding-page" : ""} ${isPid ? "pid-control-page" : ""}`}
+      } ${isAgents ? "agents-page" : ""} ${isHonors ? "honors-page" : ""} ${isCoding ? "coding-page" : ""} ${isPid ? "pid-control-page" : ""} ${isHobby ? "life-hobbies-page" : ""}`}
     >
       <Header lang={lang} setLang={setLang} />
       <section className="detail-hero">
@@ -1061,7 +1089,14 @@ function Detail({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) => void }
           <Link className="back-link" to="/">
             {lang === "en" ? "Back to sticker map" : "返回贴纸地图"}
           </Link>
-          <h1>{page.title[lang]}</h1>
+          {isSelfIntro ? (
+            <div className="self-title-row">
+              <h1>{page.title[lang]}</h1>
+              <SelfIntroAudioButton lang={lang} />
+            </div>
+          ) : (
+            <h1>{page.title[lang]}</h1>
+          )}
           <p className="detail-subtitle">{page.subtitle[lang]}</p>
           <p className="detail-intro">{page.intro[lang]}</p>
           <div className="skill-cloud" aria-label="Skills">
@@ -1073,7 +1108,7 @@ function Detail({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) => void }
 
         {isSelfIntro ? (
           <SelfIntroGallery photos={page.photos ?? []} />
-        ) : !isHonors && !isRobotics && !isCoding && !isAgents && !isPid ? (
+        ) : !isHonors && !isRobotics && !isCoding && !isAgents && !isPid && !isHobby ? (
           <MediaShowcase page={page} lang={lang} />
         ) : null}
       </section>
@@ -1083,13 +1118,15 @@ function Detail({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) => void }
       ) : isSelfIntro ? (
         <EducationSection education={page.education ?? []} lang={lang} />
       ) : isRobotics ? (
-        <RoboticsExperienceSection sections={page.roboticsSections ?? []} />
+        <RoboticsExperienceSection sections={page.roboticsSections ?? []} lang={lang} />
       ) : isCoding ? (
-        <CodingExperienceSection sections={page.codingSections ?? []} />
+        <CodingExperienceSection sections={page.codingSections ?? []} lang={lang} />
       ) : isPid ? (
-        <PidExperienceSection sections={page.pidSections ?? []} />
+        <PidExperienceSection sections={page.pidSections ?? []} lang={lang} />
+      ) : isHobby ? (
+        <HobbyExperienceSection sections={page.hobbySections ?? []} lang={lang} />
       ) : isAgents ? (
-        <AgentExperienceSection sections={page.agentsSections ?? []} />
+        <AgentExperienceSection sections={page.agentsSections ?? []} lang={lang} />
       ) : (
         <section className="detail-grid">
           <Timeline page={page} lang={lang} />
@@ -1097,6 +1134,87 @@ function Detail({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) => void }
         </section>
       )}
     </main>
+  );
+}
+
+function SelfIntroAudioButton({ lang }: { lang: Lang }) {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [playError, setPlayError] = useState(false);
+  const audioSrc = selfIntroAudioSrc[lang];
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) {
+      return;
+    }
+
+    audio.pause();
+    audio.currentTime = 0;
+    setIsPlaying(false);
+    setPlayError(false);
+  }, [audioSrc]);
+
+  const toggleAudio = async () => {
+    const audio = audioRef.current;
+    if (!audio) {
+      return;
+    }
+
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+      return;
+    }
+
+    try {
+      setPlayError(false);
+      await audio.play();
+      setIsPlaying(true);
+    } catch {
+      setIsPlaying(false);
+      setPlayError(true);
+    }
+  };
+
+  const actionText = lang === "en" ? "Voice intro" : "语音介绍";
+  const statusText = playError ? (lang === "en" ? "Audio unavailable" : "音频暂不可用") : actionText;
+  const ariaLabel =
+    lang === "en"
+      ? isPlaying
+        ? "Pause English self introduction audio"
+        : "Play English self introduction audio"
+      : isPlaying
+        ? "暂停中文自我介绍音频"
+        : "播放中文自我介绍音频";
+
+  return (
+    <div className="self-audio-player">
+      <button
+        type="button"
+        className={`self-audio-button ${isPlaying ? "is-playing" : ""}`}
+        onClick={toggleAudio}
+        aria-label={ariaLabel}
+        aria-pressed={isPlaying}
+      >
+        <span className="speaker-icon" aria-hidden="true">
+          <span className="speaker-body" />
+          <span className="speaker-wave speaker-wave-one" />
+          <span className="speaker-wave speaker-wave-two" />
+        </span>
+      </button>
+      <span className="self-audio-board" aria-hidden="true">
+        <span className="self-audio-label">{statusText}</span>
+        <span className="voice-bars">
+          <span />
+          <span />
+          <span />
+          <span />
+          <span />
+        </span>
+      </span>
+      <audio ref={audioRef} src={audioSrc} preload="none" onEnded={() => setIsPlaying(false)} />
+    </div>
   );
 }
 
@@ -1122,31 +1240,31 @@ function EducationSection({ education, lang }: { education: NonNullable<DetailPa
   return (
     <section className="education-section" aria-label="Education background">
       {education.map((item) => (
-        <article className="education-card" key={item.school}>
+        <article className="education-card" key={item.school[lang]}>
           <div className="edu-logo-badge">
             {item.url ? (
-              <a href={item.url} target="_blank" rel="noopener noreferrer" title={`Visit ${item.school} official website`}>
-                <img src={publicAsset(item.logo)} alt={`${item.school} logo`} />
+              <a href={item.url} target="_blank" rel="noopener noreferrer" title={`Visit ${item.school.en} official website`}>
+                <img src={publicAsset(item.logo)} alt={`${item.school[lang]} logo`} />
               </a>
             ) : (
-              <img src={publicAsset(item.logo)} alt={`${item.school} logo`} />
+              <img src={publicAsset(item.logo)} alt={`${item.school[lang]} logo`} />
             )}
           </div>
           <div className="education-heading">
             <p>{item.period}</p>
-            <h2>{item.school}</h2>
+            <h2>{item.school[lang]}</h2>
             <h3>
-              {item.degree} · {item.major}
+              {item.degree[lang]} · {item.major[lang]}
             </h3>
           </div>
           <dl>
             <div>
               <dt>{t.research}</dt>
-              <dd>{item.research}</dd>
+              <dd>{item.research[lang]}</dd>
             </div>
             <div>
               <dt>{t.courses}</dt>
-              <dd>{item.courses.join(" / ")}</dd>
+              <dd>{item.courses[lang].join(" / ")}</dd>
             </div>
             <div>
               <dt>{t.record}</dt>
@@ -1159,7 +1277,7 @@ function EducationSection({ education, lang }: { education: NonNullable<DetailPa
   );
 }
 
-function RoboticsExperienceSection({ sections }: { sections: NonNullable<DetailPage["roboticsSections"]> }) {
+function RoboticsExperienceSection({ sections, lang }: { sections: NonNullable<DetailPage["roboticsSections"]>; lang: Lang }) {
   return (
     <section className="robotics-experience-section" aria-label="Robotics experience">
       {sections.map((item, index) => (
@@ -1168,11 +1286,11 @@ function RoboticsExperienceSection({ sections }: { sections: NonNullable<DetailP
             <p className="robotics-kicker">
               {String(index + 1).padStart(2, "0")} / {item.period}
             </p>
-            <h2>{item.title}</h2>
-            <h3>{item.role}</h3>
-            <p>{item.body}</p>
+            <h2>{item.title[lang]}</h2>
+            <h3>{item.role[lang]}</h3>
+            <p>{item.body[lang]}</p>
             <ul>
-              {item.bullets.map((bullet) => (
+              {item.bullets[lang].map((bullet) => (
                 <li key={bullet}>{bullet}</li>
               ))}
             </ul>
@@ -1205,22 +1323,27 @@ function MediaSlot({
   return (
     <div className={`${prefix}-media-slot ${prefix}-media-${mediaType}`}>
       {mediaSrc ? (
-        mediaType === "video" ? (
-          <video src={publicAsset(mediaSrc)} controls muted loop playsInline preload="metadata" />
-        ) : (
-          <img src={publicAsset(mediaSrc)} alt={mediaLabel} />
-        )
+        <>
+          <div className={`${prefix}-media-frame`}>
+            {mediaType === "video" ? (
+              <video src={publicAsset(mediaSrc)} controls muted loop playsInline preload="metadata" />
+            ) : (
+              <img src={publicAsset(mediaSrc)} alt={mediaLabel} />
+            )}
+          </div>
+          <span className={`${prefix}-media-caption`}>{mediaLabel}</span>
+        </>
       ) : (
         <>
           {mediaType === "video" && <div className={`${prefix}-play-mark`} aria-hidden="true" />}
-          <span>{mediaLabel}</span>
+          <span className={`${prefix}-media-caption`}>{mediaLabel}</span>
         </>
       )}
     </div>
   );
 }
 
-function AgentExperienceSection({ sections }: { sections: NonNullable<DetailPage["agentsSections"]> }) {
+function AgentExperienceSection({ sections, lang }: { sections: NonNullable<DetailPage["agentsSections"]>; lang: Lang }) {
   return (
     <section className="agents-experience-section" aria-label="AI Agent projects">
       {sections.map((item, index) => (
@@ -1229,11 +1352,11 @@ function AgentExperienceSection({ sections }: { sections: NonNullable<DetailPage
             <p className="agents-kicker">
               {String(index + 1).padStart(2, "0")} / {item.period}
             </p>
-            <h2>{item.title}</h2>
-            <h3>{item.role}</h3>
-            <p>{item.body}</p>
+            <h2>{item.title[lang]}</h2>
+            <h3>{item.role[lang]}</h3>
+            <p>{item.body[lang]}</p>
             <ul>
-              {item.bullets.map((bullet) => (
+              {item.bullets[lang].map((bullet) => (
                 <li key={bullet}>{bullet}</li>
               ))}
             </ul>
@@ -1252,7 +1375,7 @@ function AgentExperienceSection({ sections }: { sections: NonNullable<DetailPage
   );
 }
 
-function PidExperienceSection({ sections }: { sections: NonNullable<DetailPage["pidSections"]> }) {
+function PidExperienceSection({ sections, lang }: { sections: NonNullable<DetailPage["pidSections"]>; lang: Lang }) {
   return (
     <section className="pid-experience-section" aria-label="PID control projects">
       {sections.map((item, index) => (
@@ -1261,11 +1384,11 @@ function PidExperienceSection({ sections }: { sections: NonNullable<DetailPage["
             <p className="pid-kicker">
               {String(index + 1).padStart(2, "0")} / {item.period}
             </p>
-            <h2>{item.title}</h2>
-            <h3>{item.role}</h3>
-            <p>{item.body}</p>
+            <h2>{item.title[lang]}</h2>
+            <h3>{item.role[lang]}</h3>
+            <p>{item.body[lang]}</p>
             <ul>
-              {item.bullets.map((bullet) => (
+              {item.bullets[lang].map((bullet) => (
                 <li key={bullet}>{bullet}</li>
               ))}
             </ul>
@@ -1284,7 +1407,39 @@ function PidExperienceSection({ sections }: { sections: NonNullable<DetailPage["
   );
 }
 
-function CodingExperienceSection({ sections }: { sections: NonNullable<DetailPage["codingSections"]> }) {
+function HobbyExperienceSection({ sections, lang }: { sections: NonNullable<DetailPage["hobbySections"]>; lang: Lang }) {
+  return (
+    <section className="hobby-experience-section" aria-label="Life & hobbies">
+      {sections.map((item, index) => (
+        <article className="hobby-experience-card" key={`${item.period}-${item.title}`}>
+          <div className="hobby-experience-copy">
+            <p className="hobby-kicker">
+              {String(index + 1).padStart(2, "0")} / {item.period}
+            </p>
+            <h2>{item.title[lang]}</h2>
+            <h3>{item.role[lang]}</h3>
+            <p>{item.body[lang]}</p>
+            <ul>
+              {item.bullets[lang].map((bullet) => (
+                <li key={bullet}>{bullet}</li>
+              ))}
+            </ul>
+          </div>
+          {item.mediaType2 ? (
+            <div className="hobby-media-grid">
+              <MediaSlot prefix="hobby" mediaType={item.mediaType} mediaSrc={item.mediaSrc} mediaLabel={item.mediaLabel} />
+              <MediaSlot prefix="hobby" mediaType={item.mediaType2 ?? "image"} mediaSrc={item.mediaSrc2} mediaLabel={item.mediaLabel2 ?? ""} />
+            </div>
+          ) : (
+            <MediaSlot prefix="hobby" mediaType={item.mediaType} mediaSrc={item.mediaSrc} mediaLabel={item.mediaLabel} />
+          )}
+        </article>
+      ))}
+    </section>
+  );
+}
+
+function CodingExperienceSection({ sections, lang }: { sections: NonNullable<DetailPage["codingSections"]>; lang: Lang }) {
   return (
     <section className="coding-experience-section" aria-label="Coding projects">
       {sections.map((item, index) => (
@@ -1293,11 +1448,11 @@ function CodingExperienceSection({ sections }: { sections: NonNullable<DetailPag
             <p className="coding-kicker">
               {String(index + 1).padStart(2, "0")} / {item.period}
             </p>
-            <h2>{item.title}</h2>
-            <h3>{item.role}</h3>
-            <p>{item.body}</p>
+            <h2>{item.title[lang]}</h2>
+            <h3>{item.role[lang]}</h3>
+            <p>{item.body[lang]}</p>
             <ul>
-              {item.bullets.map((bullet) => (
+              {item.bullets[lang].map((bullet) => (
                 <li key={bullet}>{bullet}</li>
               ))}
             </ul>
