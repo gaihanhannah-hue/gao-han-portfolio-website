@@ -1234,7 +1234,7 @@ html:lang(zh) .contact-item {
   position: relative;
   display: flex;
   flex-direction: column;
-  overflow: visible;
+  overflow: hidden;
   background:
     linear-gradient(135deg, rgba(130, 184, 109, 0.16), rgba(100, 200, 207, 0.12)),
     rgba(255, 250, 240, 0.8);
