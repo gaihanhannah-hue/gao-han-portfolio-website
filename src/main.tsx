@@ -123,7 +123,7 @@ type DetailPage = {
   detailedSkills?: Array<{
     category: Record<Lang, string>;
     icon: string;
-    desc: Record<Lang, string>;
+    items: Record<Lang, string[]>;
   }>;
   education?: Array<{
     school: Record<Lang, string>;
@@ -186,13 +186,9 @@ const pages: DetailPage[] = [
     accent: "cyan",
     photos: [
       "/assets/stickers/grad-cutouts/grad-1.png",
-      "/assets/stickers/grad-cutouts/grad-2.png",
       "/assets/stickers/grad-cutouts/grad-3.png",
       "/assets/stickers/grad-cutouts/grad-4.png",
       "/assets/stickers/grad-cutouts/grad-5.png",
-      "/assets/stickers/grad-cutouts/grad-6.png",
-      "/assets/stickers/grad-cutouts/grad-7.png",
-      "/assets/stickers/grad-cutouts/grad-8.png",
     ],
     education: [
       {
@@ -299,43 +295,105 @@ const pages: DetailPage[] = [
     ],
     detailedSkills: [
       {
+        category: { en: "AI-Assisted Web Coding", zh: "AI 辅助 Web 开发" },
+        icon: "🤖",
+        items: {
+          en: [
+            "AI coding agents: Claude Code, Cursor, Codex, Hermes Agent",
+            "Prompt engineering for precise, reliable LLM-guided code generation",
+            "Rapid prototyping & architecture design with AI-assisted workflows",
+            "Quick adaptation to emerging Agent tooling & integration into dev pipelines",
+          ],
+          zh: [
+            "AI 编码 Agent：Claude Code、Cursor、Codex、Hermes Agent",
+            "Prompt Engineering：精准引导大模型生成可靠代码",
+            "AI 辅助工作流：快速原型设计与架构规划",
+            "快速适应最新 Agent 工具并整合到开发管线",
+          ],
+        },
+      },
+      {
         category: { en: "Programming & Algorithms", zh: "编程与算法开发" },
         icon: "💻",
-        desc: {
-          en: "Proficient in C and Python; skilled in MATLAB for system simulation. Experienced with PPO/SAC/DDPG reinforcement learning algorithms and genetic/Bayesian optimization methods. Capable of robot control code development and algorithm tuning.",
-          zh: "精通C、Python编程语言，熟练运用MATLAB进行系统仿真；掌握PPO/SAC/DDPG等强化学习算法，熟悉遗传、贝叶斯等优化方法，具备机器人控制代码编写与算法调优能力。",
+        items: {
+          en: [
+            "C & Python: proficient in algorithm development and system programming",
+            "MATLAB: system simulation, modeling, and data analysis",
+            "Reinforcement learning: PPO, SAC, DDPG algorithm implementation & tuning",
+            "Optimization: genetic algorithms, Bayesian methods for parameter search",
+          ],
+          zh: [
+            "C 与 Python：精通算法开发与系统编程",
+            "MATLAB：系统仿真、建模与数据分析",
+            "强化学习：PPO、SAC、DDPG 算法实现与调优",
+            "优化方法：遗传算法、贝叶斯优化用于参数搜索",
+          ],
         },
       },
       {
         category: { en: "Simulation & Engineering", zh: "仿真与工程引擎" },
         icon: "🔧",
-        desc: {
-          en: "Proficient with MuJoCo, Isaac Gym, and Sim-MuJoCo physics simulation engines. Skilled in ROS 2 for hardware-software communication and coordination, with experience in simulation environment setup, model debugging, and validation.",
-          zh: "精通MuJoCo、Isaac Gym/Sim-MuJoCo仿真物理引擎，熟练运用ROS 2机器人操作系统实现软硬件通信协同，具备仿真环境搭建、模型调试与验证能力。",
+        items: {
+          en: [
+            "MuJoCo, Isaac Gym, Sim-MuJoCo: physics simulation & environment setup",
+            "ROS 2: hardware-software communication, node coordination",
+            "Simulation debugging, model validation & performance tuning",
+          ],
+          zh: [
+            "MuJoCo、Isaac Gym、Sim-MuJoCo：物理仿真引擎与环境搭建",
+            "ROS 2：机器人操作系统软硬件通信与节点协调",
+            "仿真调试、模型验证与性能调优",
+          ],
         },
       },
       {
         category: { en: "Design & Modeling", zh: "设计与建模软件" },
         icon: "🎨",
-        desc: {
-          en: "Skilled in CAD and SolidWorks for mechanical structure design and modeling, including model format conversion and system integration. Familiar with 3D printing lightweight structure workflows.",
-          zh: "熟练使用CAD、SolidWorks进行机械结构设计与建模，可完成模型格式转换与系统集成，掌握3D打印轻量化结构实现相关流程。",
+        items: {
+          en: [
+            "CAD & SolidWorks: mechanical structure design & 3D modeling",
+            "Model format conversion & cross-platform system integration",
+            "3D printing: lightweight structure design & fabrication workflows",
+          ],
+          zh: [
+            "CAD 与 SolidWorks：机械结构设计与三维建模",
+            "模型格式转换与跨平台系统集成",
+            "3D 打印：轻量化结构设计与制造流程",
+          ],
         },
       },
       {
         category: { en: "OS & Tools", zh: "操作系统与工具" },
         icon: "🖥️",
-        desc: {
-          en: "Familiar with Linux/Ubuntu system operations and environment configuration. Proficient in Office (Excel/Word/PPT). Experienced with WeChat Mini Program development, MQTT protocol communication, and OpenCV visual recognition.",
-          zh: "熟悉Linux/Ubuntu系统操作与环境配置，精通Office办公软件。掌握微信小程序开发、MQTT协议通信与OpenCV视觉识别技术。",
+        items: {
+          en: [
+            "Linux/Ubuntu: system operations, environment configuration & shell scripting",
+            "WeChat Mini Program: WXML/WXSS frontend + cloud backend development",
+            "MQTT protocol: IoT communication & real-time data streaming",
+            "OpenCV: computer vision, image processing & object detection",
+          ],
+          zh: [
+            "Linux/Ubuntu：系统操作、环境配置与 Shell 脚本",
+            "微信小程序：WXML/WXSS 前端 + 云后端开发",
+            "MQTT 协议：物联网通信与实时数据传输",
+            "OpenCV：计算机视觉、图像处理与目标检测",
+          ],
         },
       },
       {
         category: { en: "Languages", zh: "语言能力" },
         icon: "🗣️",
-        desc: {
-          en: "Passed CET-4 and CET-6; IELTS 6.5. Strong English reading, writing, and communication skills.",
-          zh: "通过大学英语四、六级考试；雅思6.5，具备良好的英文读写与交流能力。",
+        items: {
+          en: [
+            "CET-4 & CET-6: certified English proficiency",
+            "IELTS 6.5: academic English — reading, writing, listening & speaking",
+            "Technical English: fluent in reading papers, writing documentation & communication",
+          ],
+          zh: [
+            "大学英语四、六级：英语能力认证",
+            "雅思 6.5：学术英语——听说读写",
+            "技术英语：流畅阅读论文、撰写文档与交流",
+          ],
         },
       },
     ],
@@ -395,7 +453,7 @@ const pages: DetailPage[] = [
         body: { en: "Worked on humanoid robot motion control as a research assistant, focusing on reinforcement learning environments and physics simulation for stable walking and jumping behaviors.", zh: "作为科研助理从事人形机器人运动控制研究，聚焦强化学习环境与物理仿真，实现稳定的行走与跳跃行为。" },
         bullets: {
           en: ["Built and configured reinforcement learning environments on Linux.", "Completed humanoid robot simulation debugging in Isaac Gym and MuJoCo.", "Compiled and tested WPC/MBC control code for walking and jumping control."],
-          zh: ["Built and configured reinforcement learning environments on Linux.", "Completed humanoid robot simulation debugging in Isaac Gym and MuJoCo.", "Compiled and tested WPC/MBC control code for walking and jumping control."],
+          zh: ["在 Linux 上搭建并配置强化学习环境", "完成 Isaac Gym 与 MuJoCo 中人形机器人仿真调试", "编译并测试 WPC/MBC 控制代码，实现行走与跳跃控制"],
         },
         mediaType: "image",
         mediaSrc: "/assets/cas-openloong-original.png",
@@ -411,7 +469,7 @@ const pages: DetailPage[] = [
         body: { en: "Led the simulation and optimization project for a serpentine mobile robot, connecting SolidWorks mechanical modeling, MuJoCo physics simulation, and reinforcement learning based motion strategy design.", zh: "主导蛇形移动机器人的仿真与优化项目，打通 SolidWorks 机械建模、MuJoCo 物理仿真与基于强化学习的运动策略设计。" },
         bullets: {
           en: ["Built the MuJoCo simulation environment on Ubuntu.", "Converted SolidWorks mechanical models into XML simulation assets.", "Combined PPO, SAC, DDPG, genetic optimization, and Bayesian optimization for motion control."],
-          zh: ["Built the MuJoCo simulation environment on Ubuntu.", "Converted SolidWorks mechanical models into XML simulation assets.", "Combined PPO, SAC, DDPG, genetic optimization, and Bayesian optimization for motion control."],
+          zh: ["在 Ubuntu 上搭建 MuJoCo 仿真环境", "将 SolidWorks 机械模型转换为 XML 仿真资产", "结合 PPO、SAC、DDPG、遗传与贝叶斯优化进行运动控制"],
         },
         mediaType: "video",
         mediaSrc: "/assets/serpentine-crawl.mp4",
@@ -427,7 +485,7 @@ const pages: DetailPage[] = [
         body: { en: "Worked on dexterous hand simulation and robot control communication, while supporting simulation workflows for humanoid robot scenarios.", zh: "从事灵巧手仿真与机器人控制通信，同时支持人形机器人场景的仿真工作流。" },
         bullets: {
           en: ["Built a dexterous hand simulation model based on Sim-MuJoCo.", "Coordinated ROS 2 communication with an MC controller for command and state feedback.", "Optimized communication efficiency and control parameters for stable scenario interaction."],
-          zh: ["Built a dexterous hand simulation model based on Sim-MuJoCo.", "Coordinated ROS 2 communication with an MC controller for command and state feedback.", "Optimized communication efficiency and control parameters for stable scenario interaction."],
+          zh: ["基于 Sim-MuJoCo 搭建灵巧手仿真模型", "协调 ROS 2 与 MC 控制器通信，实现命令下发与状态反馈", "优化通信效率与控制参数，实现稳定场景交互"],
         },
         mediaType: "image",
         mediaSrc: "/assets/agibot-motion-control.jpg",
@@ -515,7 +573,7 @@ const pages: DetailPage[] = [
         body: { en: "Built a locally deployed, private RAG-based Education Agent. Users query an ingested knowledge base, upload documents, and receive auto-generated structured PPT presentations. The pipeline integrates LangChain for retrieval and LLM/VLM for content generation, running entirely in a private repository for data-sensitive educational use cases.", zh: "搭建了本地化部署的私有 RAG 教育类 Agent。用户可基于已摄入的知识库进行问答，上传文档后自动生成结构化 PPT 演示文稿。管线整合 LangChain 进行检索、LLM/VLM 进行内容生成，整套系统运行在私有化仓库中，面向对数据隐私有要求的教育场景。" },
         bullets: {
           en: ["LangChain RAG pipeline with local knowledge base ingestion and semantic retrieval", "LLM/VLM-powered document-to-PPT generation as structured output", "Modular orchestration layer for flexible workflow control", "Privately deployed — designed for education scenarios where data privacy matters"],
-          zh: ["LangChain RAG pipeline with local knowledge base ingestion and semantic retrieval", "LLM/VLM-powered document-to-PPT generation as structured output", "Modular orchestration layer for flexible workflow control", "Privately deployed — designed for education scenarios where data privacy matters"],
+          zh: ["LangChain RAG 管线：本地知识库摄入与语义检索", "LLM/VLM 驱动的文档转 PPT 结构化输出", "模块化编排层实现灵活工作流控制", "私有化部署 — 面向数据隐私敏感的教育场景"],
         },
         mediaType: "image",
         mediaSrc: "/assets/agent-qa-local.png",
@@ -531,7 +589,7 @@ const pages: DetailPage[] = [
         body: { en: "Developed industry-specific Agents on poffices.AI, contributing to visual workflow orchestration, modular feature packaging and agile low-code application delivery. Built custom Blocks and configured node-based logic for business scenarios, improving workflow reuse and scenario-specific processing efficiency. Embedded Python scripts for complex business logic, and supported scenario adaptation plus online performance optimization for scalable AI Agent deployment.", zh: "在 poffices.AI 平台上开发面向行业的 AI Agent，参与可视化工作流编排、模块化功能封装与敏捷低代码应用交付。构建自定义 Blocks 并配置面向业务场景的节点式逻辑，提升工作流复用性与场景化处理效率。嵌入 Python 脚本实现复杂业务逻辑，支持场景适配与线上性能优化。" },
         bullets: {
           en: ["Developed industry Agents on poffices.AI — visual workflow orchestration & low-code delivery", "Built custom Blocks & node-based logic for business scenarios, improving workflow reuse", "Embedded Python scripts for complex business rules with scenario adaptation", "Online performance optimization for scalable AI Agent deployment"],
-          zh: ["Developed industry Agents on poffices.AI — visual workflow orchestration & low-code delivery", "Built custom Blocks & node-based logic for business scenarios, improving workflow reuse", "Embedded Python scripts for complex business rules with scenario adaptation", "Online performance optimization for scalable AI Agent deployment"],
+          zh: ["在 poffices.AI 平台开发行业 Agent — 可视化工作流编排与低代码交付", "构建自定义 Blocks 与节点式业务逻辑，提升工作流复用效率", "嵌入 Python 脚本处理复杂业务规则，支持场景适配", "线上性能优化，实现可扩展的 AI Agent 部署"],
         },
         mediaType: "image",
         mediaSrc: "/assets/agent-poffices-workflow.png",
@@ -544,10 +602,10 @@ const pages: DetailPage[] = [
         period: "2025.09 - 2025.12",
         role: { en: "AIoT System Developer", zh: "AIoT 系统开发者" },
         title: { en: "AIoT Smart Bathroom — LLM-Driven Environmental Control", zh: "AIoT 智能浴室 — 大模型驱动环境调控" },
-        body: { en: "Built an STM32-based smart bathroom integrating temperature, humidity, PIR, CO₂, PM2.5, and water leakage sensors. An LLM decision layer interprets multi-sensor context holistically — reasoning across time-series patterns to trigger coordinated responses like exhaust activation, valve adjustment, or alerts. Users converse with the system in natural language, and the LLM provides contextual answers grounded in real-time sensor data.", zh: "Built an STM32-based smart bathroom integrating temperature, humidity, PIR, CO₂, PM2.5, and water leakage sensors. An LLM decision layer interprets multi-sensor context holistically — reasoning across time-series patterns to trigger coordinated responses like exhaust activation, valve adjustment, or alerts. Users converse with the system in natural language, and the LLM provides contextual answers grounded in real-time sensor data." },
+        body: { en: "Built an STM32-based smart bathroom integrating temperature, humidity, PIR, CO₂, PM2.5, and water leakage sensors. An LLM decision layer interprets multi-sensor context holistically — reasoning across time-series patterns to trigger coordinated responses like exhaust activation, valve adjustment, or alerts. Users converse with the system in natural language, and the LLM provides contextual answers grounded in real-time sensor data.", zh: "基于 STM32 搭建智能浴室系统，集成温湿度、人体红外、CO₂、PM2.5 及漏水检测传感器。LLM 决策层从整体解读多传感器上下文，跨时间序列模式推理，自主触发排风扇、水阀调节或预警通知等协调响应。用户可用自然语言与系统对话，LLM 基于实时传感器数据给出有上下文依据的回答。" },
         bullets: {
-          en: ["STM32 sensor array with cloud backend and real-time web dashboard visualization", "LLM reasoning layer replaces hard-coded rules — understands multi-sensor context", "Autonomous coordinated responses: exhaust fans, water valves, alert notifications", "Natural-language interaction: users ask questions, LLM answers from live sensor data"],
-          zh: ["STM32 sensor array with cloud backend and real-time web dashboard visualization", "LLM reasoning layer replaces hard-coded rules — understands multi-sensor context", "Autonomous coordinated responses: exhaust fans, water valves, alert notifications", "Natural-language interaction: users ask questions, LLM answers from live sensor data"],
+          en: ["基于 STM32 的传感器阵列 + 云后端 + 实时 Web 可视化仪表盘", "LLM 推理层替代硬编码规则 — 理解多传感器上下文语义", "自主协调响应：排风扇控制、水阀调节、预警通知", "自然语言交互：用户提问，LLM 基于实时传感器数据回答"],
+          zh: ["基于 STM32 的传感器阵列 + 云后端 + 实时 Web 可视化仪表盘", "LLM 推理层替代硬编码规则 — 理解多传感器上下文语义", "自主协调响应：排风扇控制、水阀调节、预警通知", "自然语言交互：用户提问，LLM 基于实时传感器数据回答"],
         },
         mediaType: "image",
         mediaSrc: "/assets/aiot-esp32-wiring.png",
@@ -616,10 +674,10 @@ const pages: DetailPage[] = [
         period: "2025.10 - 2025.12",
         role: { en: "Master's Group Project", zh: "硕士课程小组项目" },
         title: { en: "UAV Search & Rescue — Adaptive PID + YOLO Detection", zh: "无人机搜救 — 自适应 PID + YOLO 行人检测" },
-        body: { en: "Built a quadrotor UAV simulation in MATLAB/Simulink for search-and-rescue missions. Designed a cascaded PID controller (position → velocity → attitude loops) for stable hover, autonomous takeoff/landing, and waypoint navigation. Integrated Gain Scheduling + PSO adaptive tuning so PID gains auto-adjust based on flight phase and wind conditions. Trained a YOLO pedestrian detector on aerial-view data to identify survivors and trigger loiter-and-report behavior.", zh: "Built a quadrotor UAV simulation in MATLAB/Simulink for search-and-rescue missions. Designed a cascaded PID controller (position → velocity → attitude loops) for stable hover, autonomous takeoff/landing, and waypoint navigation. Integrated Gain Scheduling + PSO adaptive tuning so PID gains auto-adjust based on flight phase and wind conditions. Trained a YOLO pedestrian detector on aerial-view data to identify survivors and trigger loiter-and-report behavior." },
+        body: { en: "Built a quadrotor UAV simulation in MATLAB/Simulink for search-and-rescue missions. Designed a cascaded PID controller (position → velocity → attitude loops) for stable hover, autonomous takeoff/landing, and waypoint navigation. Integrated Gain Scheduling + PSO adaptive tuning so PID gains auto-adjust based on flight phase and wind conditions. Trained a YOLO pedestrian detector on aerial-view data to identify survivors and trigger loiter-and-report behavior.", zh: "在 MATLAB/Simulink 中搭建四旋翼无人机仿真模型，面向搜救任务。设计级联 PID 控制器（位置→速度→姿态回路），实现稳定悬停、自主起降和航点导航。集成增益调度 + PSO 自适应调参，PID 增益根据飞行阶段与风扰实时自动调整。基于航拍数据训练 YOLO 行人检测器，识别幸存者并触发悬停报告行为。" },
         bullets: {
           en: ["Cascaded PID: position → velocity → attitude loops in MATLAB/Simulink", "Gain Scheduling + PSO adaptive tuning — gains adjust in real-time to flight phase & wind", "Integrated radar, IMU, barometer, GPS sensor models for state estimation", "YOLO-based pedestrian detection on custom aerial dataset → mission planner feedback"],
-          zh: ["Cascaded PID: position → velocity → attitude loops in MATLAB/Simulink", "Gain Scheduling + PSO adaptive tuning — gains adjust in real-time to flight phase & wind", "Integrated radar, IMU, barometer, GPS sensor models for state estimation", "YOLO-based pedestrian detection on custom aerial dataset → mission planner feedback"],
+          zh: ["级联 PID：位置→速度→姿态回路，MATLAB/Simulink 实现", "增益调度 + PSO 自适应调参——增益根据飞行阶段与风扰实时调整", "集成雷达、IMU、气压计、GPS 传感器模型进行状态估计", "基于自定义航拍数据集训练 YOLO 行人检测，反馈至任务规划器"],
         },
         mediaType: "video",
         mediaSrc: "/assets/drone-search-rescue.mp4",
@@ -635,7 +693,7 @@ const pages: DetailPage[] = [
         body: { en: "Hands-on PID control on physical water tank and boiler systems with real sensors and actuators. Performed system identification via step-response testing, applied Ziegler-Nichols tuning rules, and refined gains through iterative closed-loop testing. Compared P, PI, and PID modes on steady-state error, overshoot, settling time, and disturbance rejection.", zh: "在真实水箱液位和锅炉温度系统上操作 PID 控制器，使用真实传感器和执行器。通过阶跃响应测试进行系统辨识，应用 Ziegler-Nichols 整定法则获取初始 PID 参数，再通过迭代闭环测试优化增益。对比 P、PI、PID 三种控制模式的稳态误差、超调量、调节时间和抗扰性能。" },
         bullets: {
           en: ["Physical water tank & boiler systems with real sensors and actuators", "System identification via step-response → plant transfer functions", "Ziegler-Nichols tuning + iterative closed-loop gain refinement", "Compared P / PI / PID: steady-state error, overshoot, settling time, disturbance rejection"],
-          zh: ["Physical water tank & boiler systems with real sensors and actuators", "System identification via step-response → plant transfer functions", "Ziegler-Nichols tuning + iterative closed-loop gain refinement", "Compared P / PI / PID: steady-state error, overshoot, settling time, disturbance rejection"],
+          zh: ["真实水箱与锅炉系统，使用传感器和执行器实物", "通过阶跃响应进行系统辨识，推导被控对象传递函数", "Ziegler-Nichols 整定 + 迭代闭环增益优化", "对比 P/PI/PID：稳态误差、超调量、调节时间、抗扰性能"],
         },
         mediaType: "image",
         mediaSrc: "/assets/pid-liquid-temp.png",
@@ -651,7 +709,7 @@ const pages: DetailPage[] = [
         body: { en: "Systematic controller design in MATLAB. Modeled dynamic systems (first-order, second-order, time-delay) using transfer functions and state-space. Performed open-loop analysis (root locus, Bode, Nyquist) for stability margins, then designed PID compensators to meet target specs. Compared Ziegler-Nichols, Cohen-Coon, and optimization-based tuning, visualizing each gain term's effect on response.", zh: "在 MATLAB 中进行系统化控制器设计与分析。使用传递函数和状态空间对各种动态系统（一阶、二阶、时滞）建模。进行开环分析（根轨迹、Bode 图、Nyquist 图）评估稳定裕度，然后设计 PID 补偿器以满足目标性能指标。比较 Ziegler-Nichols、Cohen-Coon 和基于优化的整定方法，可视化每个增益项对响应的影响。" },
         bullets: {
           en: ["Transfer function & state-space modeling for 1st/2nd-order + time-delay systems", "Open-loop analysis: root locus, Bode plots, Nyquist diagrams for stability margins", "PID compensator design comparing Ziegler-Nichols, Cohen-Coon, optimization-based tuning", "Visualized Kp/Ki/Kd effects on rise time, overshoot, steady-state error, oscillation damping"],
-          zh: ["Transfer function & state-space modeling for 1st/2nd-order + time-delay systems", "Open-loop analysis: root locus, Bode plots, Nyquist diagrams for stability margins", "PID compensator design comparing Ziegler-Nichols, Cohen-Coon, optimization-based tuning", "Visualized Kp/Ki/Kd effects on rise time, overshoot, steady-state error, oscillation damping"],
+          zh: ["传递函数与状态空间建模：一阶/二阶 + 时滞系统", "开环分析：根轨迹、Bode 图、Nyquist 图评估稳定裕度", "PID 补偿器设计：比较 Ziegler-Nichols、Cohen-Coon、优化整定法", "可视化 Kp/Ki/Kd 对上升时间、超调量、稳态误差和振荡阻尼的影响"],
         },
         mediaType: "image",
         mediaSrc: "/assets/pid-matlab.png",
@@ -731,7 +789,7 @@ const pages: DetailPage[] = [
         body: { en: "Built a WeChat Mini Program as the remote control interface for an Arduino smart car, bridging mobile frontend, cloud backend, and embedded hardware into one integrated system. The mini program sends real-time motion commands via MQTT protocol and displays historical sensor data.", zh: "开发微信小程序作为 Arduino 智能小车的远程控制界面，将移动前端、云后端与嵌入式硬件打通为一体化系统。小程序通过 MQTT 协议发送实时运动指令并展示历史传感器数据。" },
         bullets: {
           en: ["WeChat Mini Program frontend with WXML/WXSS for mobile remote control UI", "Cloud backend with MQTT protocol bridging mobile commands to embedded hardware", "Real-time bidirectional communication: commands down, sensor telemetry up", "Cloud data logging with in-app historical visualization"],
-          zh: ["WeChat Mini Program frontend with WXML/WXSS for mobile remote control UI", "Cloud backend with MQTT protocol bridging mobile commands to embedded hardware", "Real-time bidirectional communication: commands down, sensor telemetry up", "Cloud data logging with in-app historical visualization"],
+          zh: ["微信小程序前端：WXML/WXSS 移动端远程控制界面", "云后端 MQTT 协议：桥接移动指令与嵌入式硬件", "实时双向通信：指令下发，传感器数据上传", "云端数据记录：应用内历史数据可视化"],
         },
         mediaType: "image",
         mediaSrc: "/assets/coding-wechat-car.png",
@@ -747,7 +805,7 @@ const pages: DetailPage[] = [
         body: { en: "Developed a full-featured desktop management application in C with a visual GUI, supporting user auth, product catalog browsing, shopping cart operations, and checkout. Modular data structures with file-based persistence for cross-session reliability.", zh: "用 C 语言开发了功能完善的超市管理桌面应用，带有可视化图形界面。系统支持用户注册与登录、按分类浏览商品、购物车增删改、结算并计算总价。设计了模块化数据结构，通过文件持久化保存会话间数据。" },
         bullets: {
           en: ["C language with visual GUI framework for desktop application development", "Modular data architecture: user, product, order data structures", "Shopping cart with full CRUD operations and checkout flow", "File-based data persistence for session-to-session continuity"],
-          zh: ["C language with visual GUI framework for desktop application development", "Modular data architecture: user, product, order data structures", "Shopping cart with full CRUD operations and checkout flow", "File-based data persistence for session-to-session continuity"],
+          zh: ["C 语言 + 可视化 GUI 框架，桌面应用开发", "模块化数据架构：用户、商品、订单数据结构", "购物车完整 CRUD 操作与结算流程", "文件持久化存储，跨会话数据连续性"],
         },
         mediaType: "image",
         mediaSrc: "/assets/coding-supermarket-login.png",
@@ -819,7 +877,7 @@ const pages: DetailPage[] = [
         body: { en: "I have been playing guitar for about four years, and picked up bass along the way. I enjoy fingerstyle guitar, strumming through pop and folk songs, and occasionally singing along. Music is my go-to way to unwind — whether learning a new piece or just jamming with friends.", zh: "弹了四年左右的吉他，中途也摸了贝斯。喜欢指弹、弹唱流行和民谣，偶尔自弹自唱。音乐是我放空的方式——不管是练一首新曲子还是跟朋友即兴合奏。" },
         bullets: {
           en: ["Fingerstyle guitar — pop, folk, and original arrangements", "Bass guitar — rhythm section and groove fundamentals", "Regular practice: technique, repertoire, and improvisation"],
-          zh: ["Fingerstyle guitar — pop, folk, and original arrangements", "Bass guitar — rhythm section and groove fundamentals", "Regular practice: technique, repertoire, and improvisation"],
+          zh: ["指弹吉他：流行、民谣与原创编曲", "贝斯：节奏律动与 groove 基础", "日常练习：技巧打磨、曲目积累与即兴演奏"],
         },
         mediaType: "video",
         mediaSrc: "/assets/guitar-playing.mp4",
@@ -835,7 +893,7 @@ const pages: DetailPage[] = [
         body: { en: "I stay active through a mix of outdoor and court sports. Hiking is my escape into nature — trails, peaks, and fresh air clear my mind. Badminton sharpens my reflexes and footwork, while tennis gives me the rhythm of rallying under the sun. Together, they keep me balanced and energized.", zh: "通过户外与球场运动的结合保持活力。登山是我融入自然的方式——山径、峰顶和新鲜空气让我头脑清醒。羽毛球锻炼反应速度与步法，网球则享受阳光下对拉的节奏感。两者让我保持平衡与精力充沛。" },
         bullets: {
           en: ["Hiking — regular trail hikes, nature exploration & peak bagging", "Badminton — fast-paced reflexes, footwork & doubles strategy", "Tennis — outdoor rally rhythm, baseline strokes & volley practice"],
-          zh: ["Hiking — regular trail hikes, nature exploration & peak bagging", "Badminton — fast-paced reflexes, footwork & doubles strategy", "Tennis — outdoor rally rhythm, baseline strokes & volley practice"],
+          zh: ["登山：定期徒步、自然探索与登顶", "羽毛球：快速反应、步法训练与双打策略", "网球：户外对拉节奏、底线击球与截击练习"],
         },
         mediaType: "image",
         mediaSrc: "/assets/hiking1.jpg",
@@ -851,7 +909,7 @@ const pages: DetailPage[] = [
         body: { en: "I bring a camera wherever I go. Photography trains my eye for composition, light, and detail — whether it is landscapes, street scenes, or the small candid moments that make a place feel real. This section is a growing gallery of my favorite captures.", zh: "走到哪里都带着相机。摄影训练了我对构图、光线和细节的敏感——无论是风景、街景还是那些让一个地方变得真实的细小瞬间。这个板块是我最喜欢的摄影作品的持续更新画廊。" },
         bullets: {
           en: ["Landscape & nature photography — mountains, coastlines, open skies", "Street & travel photography — urban textures, local life, cultural moments", "Composition & light awareness feeding back into design sensibility"],
-          zh: ["Landscape & nature photography — mountains, coastlines, open skies", "Street & travel photography — urban textures, local life, cultural moments", "Composition & light awareness feeding back into design sensibility"],
+          zh: ["自然风光摄影：山川、海岸、开阔天空", "街拍与旅行摄影：城市肌理、当地生活、人文瞬间", "构图与光线敏感度，潜移默化影响设计审美"],
         },
         mediaType: "image",
         mediaSrc: "/assets/photo1.jpg",
@@ -1219,11 +1277,26 @@ function SelfIntroAudioButton({ lang }: { lang: Lang }) {
 }
 
 function SelfIntroGallery({ photos }: { photos: string[] }) {
+  const hero = photos[0];
+  const accents = photos.slice(1);
+
   return (
-    <aside className="self-sticker-gallery" aria-label="Graduation sticker collage">
-      {photos.map((photo, index) => (
-        <figure className="self-sticker-card" key={photo}>
-          <img src={publicAsset(photo)} alt={`Graduation sticker ${index + 1}`} />
+    <aside className="self-sticker-gallery" aria-label="Graduation photo collage">
+      {/* Decorative floating stickers */}
+      <span className="gallery-decor decor-flower" aria-hidden="true">💐</span>
+      <span className="gallery-decor decor-star" aria-hidden="true">⭐</span>
+      <span className="gallery-decor decor-heart" aria-hidden="true">🌸</span>
+      <span className="gallery-decor decor-sparkle" aria-hidden="true">✨</span>
+
+      {/* Hero photo — large, centered */}
+      <figure className="self-sticker-hero" key={hero}>
+        <img src={publicAsset(hero)} alt="Graduation photo — main" />
+      </figure>
+
+      {/* Accent photos — smaller, positioned around */}
+      {accents.map((photo, i) => (
+        <figure className={`self-sticker-accent accent-${i + 1}`} key={photo}>
+          <img src={publicAsset(photo)} alt={`Graduation photo ${i + 2}`} />
         </figure>
       ))}
     </aside>
@@ -1523,7 +1596,11 @@ function AwardsSkillsSection({
               <div className="skill-card" key={sk.category.en}>
                 <span className="skill-icon">{sk.icon}</span>
                 <h3>{sk.category[lang]}</h3>
-                <p>{sk.desc[lang]}</p>
+                <ul>
+                  {sk.items[lang].map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
