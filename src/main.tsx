@@ -33,6 +33,15 @@ const selfIntroAudioSrc: Record<Lang, string> = {
   zh: new URL("../photo_video/中文自我介绍.m4a", import.meta.url).href,
 };
 
+const hobbyHeroPhotos = [
+  "/assets/stickers/life-cutouts/life-1.png",
+  "/assets/stickers/life-cutouts/life-4.png",
+  "/assets/stickers/life-cutouts/life-13.png",
+  "/assets/stickers/life-cutouts/life-16.png",
+];
+
+const hobbyFairySrc = "/assets/stickers/infj-cutout.png";
+
 type DetailPage = {
   slug: string;
   label: Record<Lang, string>;
@@ -1122,18 +1131,37 @@ function VibeCodingSticker({ lang }: { lang: Lang }) {
 function Detail({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) => void }) {
   const { slug } = useParams();
   const page = pages.find((item) => item.slug === slug);
+  const [fairyFlight, setFairyFlight] = useState({ stopIndex: -1, hopId: 0 });
+
+  const isSelfIntro = page?.slug === "self-introduction";
+  const isHonors = page?.slug === "honors";
+  const isRobotics = page?.slug === "robotics";
+  const isCoding = page?.slug === "coding";
+  const isAgents = page?.slug === "agents";
+  const isPid = page?.slug === "pid-control";
+  const isHobby = page?.slug === "life-hobbies";
+
+  const launchHobbyFairy = () => {
+    const cards = Array.from(document.querySelectorAll<HTMLElement>(".hobby-experience-card"));
+    const stopCount = Math.min(cards.length, 3);
+    if (!stopCount) {
+      return;
+    }
+
+    setFairyFlight((current) => {
+      const nextStopIndex = (current.stopIndex + 1) % stopCount;
+      cards[nextStopIndex]?.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      return {
+        stopIndex: nextStopIndex,
+        hopId: current.hopId + 1,
+      };
+    });
+  };
 
   if (!page) {
     return <Navigate to="/" replace />;
   }
-
-  const isSelfIntro = page.slug === "self-introduction";
-  const isHonors = page.slug === "honors";
-  const isRobotics = page.slug === "robotics";
-  const isCoding = page.slug === "coding";
-  const isAgents = page.slug === "agents";
-  const isPid = page.slug === "pid-control";
-  const isHobby = page.slug === "life-hobbies";
 
   return (
     <main
@@ -1166,6 +1194,13 @@ function Detail({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) => void }
 
         {isSelfIntro ? (
           <SelfIntroGallery photos={page.photos ?? []} />
+        ) : isHobby ? (
+          <HobbyHeroStickers
+            lang={lang}
+            stopIndex={fairyFlight.stopIndex}
+            hopId={fairyFlight.hopId}
+            onLaunch={launchHobbyFairy}
+          />
         ) : !isHonors && !isRobotics && !isCoding && !isAgents && !isPid && !isHobby ? (
           <MediaShowcase page={page} lang={lang} />
         ) : null}
@@ -1182,7 +1217,7 @@ function Detail({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) => void }
       ) : isPid ? (
         <PidExperienceSection sections={page.pidSections ?? []} lang={lang} />
       ) : isHobby ? (
-        <HobbyExperienceSection sections={page.hobbySections ?? []} lang={lang} />
+        <HobbyExperienceSection sections={page.hobbySections ?? []} lang={lang} activeStopIndex={fairyFlight.stopIndex} />
       ) : isAgents ? (
         <AgentExperienceSection sections={page.agentsSections ?? []} lang={lang} />
       ) : (
@@ -1192,6 +1227,38 @@ function Detail({ lang, setLang }: { lang: Lang; setLang: (lang: Lang) => void }
         </section>
       )}
     </main>
+  );
+}
+
+function HobbyHeroStickers({
+  lang,
+  stopIndex,
+  hopId,
+  onLaunch,
+}: {
+  lang: Lang;
+  stopIndex: number;
+  hopId: number;
+  onLaunch: () => void;
+}) {
+  const label = lang === "en" ? "Fly the INFJ fairy to the next hobby" : "Fly the INFJ fairy to the next hobby";
+
+  return (
+    <aside className="hobby-hero-stickers" aria-label="Life photo sticker collage">
+      {hobbyHeroPhotos.map((photo, index) => (
+        <figure className={`hobby-life-sticker life-sticker-${index + 1}`} key={photo}>
+          <img src={publicAsset(photo)} alt="" />
+        </figure>
+      ))}
+      <button
+        type="button"
+        className={`hobby-fairy-sticker ${stopIndex >= 0 ? "is-flying" : ""} ${stopIndex >= 0 ? `fairy-stop-${stopIndex + 1}` : ""} fairy-hop-${hopId % 2}`}
+        onClick={onLaunch}
+        aria-label={label}
+      >
+        <img src={publicAsset(hobbyFairySrc)} alt="" />
+      </button>
+    </aside>
   );
 }
 
@@ -1480,11 +1547,22 @@ function PidExperienceSection({ sections, lang }: { sections: NonNullable<Detail
   );
 }
 
-function HobbyExperienceSection({ sections, lang }: { sections: NonNullable<DetailPage["hobbySections"]>; lang: Lang }) {
+function HobbyExperienceSection({
+  sections,
+  lang,
+  activeStopIndex,
+}: {
+  sections: NonNullable<DetailPage["hobbySections"]>;
+  lang: Lang;
+  activeStopIndex?: number;
+}) {
   return (
     <section className="hobby-experience-section" aria-label="Life & hobbies">
       {sections.map((item, index) => (
-        <article className="hobby-experience-card" key={`${item.period}-${item.title}`}>
+        <article
+          className={`hobby-experience-card ${activeStopIndex === index ? "is-fairy-stop" : ""}`}
+          key={`${item.period}-${item.title}`}
+        >
           <div className="hobby-experience-copy">
             <p className="hobby-kicker">
               {String(index + 1).padStart(2, "0")} / {item.period}
