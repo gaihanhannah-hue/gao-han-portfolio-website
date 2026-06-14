@@ -35,7 +35,7 @@ const selfIntroAudioSrc: Record<Lang, string> = {
 
 const hobbyHeroPhotos = [
   "/assets/stickers/life-cutouts/life-1.png",
-  "/assets/stickers/life-cutouts/life-4.png",
+  "/assets/stickers/life-cutouts/life-19.png",
   "/assets/stickers/life-cutouts/life-13.png",
   "/assets/stickers/life-cutouts/life-16.png",
 ];
@@ -524,7 +524,7 @@ const pages: DetailPage[] = [
     },
     timeline: [
       {
-        date: { en: "2026.03 - Present", zh: "2026.03 - 至今" },
+        date: { en: "2025.11 - 2026.06", zh: "2025.11 - 2026.06" },
         title: { en: "Project 1 — Education Agent: RAG + Document-to-PPT Pipeline", zh: "项目一 — 教育类 Agent：RAG + 文档转 PPT 管线" },
         body: {
           en: "Built a locally deployed, private RAG-based Education Agent. Users can ask questions against an ingested knowledge base, upload documents, and receive auto-generated PPT presentations as structured output. The pipeline integrates LangChain for retrieval, LLM/VLM for content generation, and a modular orchestration layer for workflow control. The entire system runs in a private repository environment, designed for educational use cases where data privacy matters.",
@@ -532,7 +532,7 @@ const pages: DetailPage[] = [
         },
       },
       {
-        date: { en: "2026.04 - Present", zh: "2026.04 - 至今" },
+        date: { en: "2026.05 - 2026.06", zh: "2026.05 - 2026.06" },
         title: { en: "Project 2 — Portfolio Website: AI-Assisted Web Coding", zh: "项目二 — 简历作品集网站：AI 辅助 Web 开发" },
         body: {
           en: "Designed and delivered this portfolio website end-to-end using an AI-assisted development workflow. Acting as architect, I defined the visual identity, information hierarchy, interactive sticker-map navigation, and bilingual content strategy. Claude Code and Cursor handled implementation under my direction — I focused on architecture decisions, design refinement, and targeted code-level adjustments where the AI needed guidance. The result is a fully responsive, bilingual React site that reflects both my engineering taste and hands-on proficiency with modern AI development tooling.",
@@ -540,7 +540,7 @@ const pages: DetailPage[] = [
         },
       },
       {
-        date: { en: "2025.09 - 2025.12", zh: "2025.09 - 2025.12" },
+        date: { en: "2026.02 - 2026.04", zh: "2026.02 - 2026.04" },
         title: { en: "Project 3 — AIoT Smart Bathroom: LLM-Driven Environmental Control", zh: "项目三 — AIoT 智能浴室：大模型驱动的环境调控" },
         body: {
           en: "Built an AIoT smart bathroom system on the ESP32 platform, integrating a sensor array — temperature/humidity, PIR human presence, infrared, CO2, PM2.5, and water leakage sensors — for real-time environmental perception. All sensor data streams to a cloud backend and a custom-built web dashboard for live visualization and historical trend charting.\n\nThe core differentiator: an LLM decision layer that makes this more than a rule engine. Rather than hard-coding if-else thresholds, the LLM interprets multi-sensor context holistically — it understands that 'high temperature + high humidity + human present' means a different action than 'high temperature + empty room'. It can reason across time-series patterns ('CO2 has been climbing for 20 minutes despite ventilation') and generate natural-language explanations for every automated action.\n\nWhen the LLM detects anomaly patterns — e.g. temperature exceeding a user-adaptive comfort threshold combined with rising humidity — it autonomously triggers coordinated responses: activating exhaust fans, adjusting water valves, or sending alerts. Users can also converse with the system in plain language ('Is the bathroom comfortable right now?' / 'Why did the fan just turn on?'), and the LLM provides contextual answers grounded in real-time sensor data. The model is the reasoning brain — sensors are its senses.",
@@ -576,7 +576,7 @@ const pages: DetailPage[] = [
     ],
     agentsSections: [
       {
-        period: "2025.11 - 2026.05",
+        period: "2025.11 - 2026.06",
         role: { en: "AI Agent Developer", zh: "AI Agent 开发工程师" },
         title: { en: "Education Agent — RAG + Document-to-PPT Pipeline", zh: "教育类 Agent — RAG + 文档转 PPT 管线" },
         body: { en: "Built a locally deployed, private RAG-based Education Agent. Users query an ingested knowledge base, upload documents, and receive auto-generated structured PPT presentations. The pipeline integrates LangChain for retrieval and LLM/VLM for content generation, running entirely in a private repository for data-sensitive educational use cases.", zh: "搭建了本地化部署的私有 RAG 教育类 Agent。用户可基于已摄入的知识库进行问答，上传文档后自动生成结构化 PPT 演示文稿。管线整合 LangChain 进行检索、LLM/VLM 进行内容生成，整套系统运行在私有化仓库中，面向对数据隐私有要求的教育场景。" },
@@ -608,7 +608,7 @@ const pages: DetailPage[] = [
         mediaLabel2: "Fig. 2 — Agent deployment interface: modular Blocks & node-based logic",
       },
       {
-        period: "2025.09 - 2025.12",
+        period: "2026.02 - 2026.04",
         role: { en: "AIoT System Developer", zh: "AIoT 系统开发者" },
         title: { en: "AIoT Smart Bathroom — LLM-Driven Environmental Control", zh: "AIoT 智能浴室 — 大模型驱动环境调控" },
         body: { en: "Built an ESP32-based smart bathroom integrating temperature, humidity, PIR, CO₂, PM2.5, and water leakage sensors. An LLM decision layer interprets multi-sensor context holistically — reasoning across time-series patterns to trigger coordinated responses like exhaust activation, valve adjustment, or alerts. Users converse with the system in natural language, and the LLM provides contextual answers grounded in real-time sensor data.", zh: "基于 ESP32 搭建智能浴室系统，集成温湿度、人体红外、CO₂、PM2.5 及漏水检测传感器。LLM 决策层从整体解读多传感器上下文，跨时间序列模式推理，自主触发排风扇、水阀调节或预警通知等协调响应。用户可用自然语言与系统对话，LLM 基于实时传感器数据给出有上下文依据的回答。" },
@@ -644,7 +644,7 @@ const pages: DetailPage[] = [
     },
     timeline: [
       {
-        date: { en: "2025.10 - 2025.12", zh: "2025.10 - 2025.12" },
+        date: { en: "2026.02 - 2026.04", zh: "2026.02 - 2026.04" },
         title: { en: "Project 1 — UAV Search & Rescue: Adaptive PID + YOLO Detection", zh: "项目一 — 无人机搜救：自适应 PID + YOLO 行人检测" },
         body: {
           en: "Master's group project. Built a quadrotor UAV simulation model in MATLAB/Simulink for search-and-rescue missions. Designed a cascaded PID controller (position → velocity → attitude loops) for stable hover, autonomous takeoff, landing, and waypoint navigation. Integrated radar, IMU, barometer, and GPS sensor models for state estimation. Implemented a Gain Scheduling + PSO (Particle Swarm Optimization) adaptive tuning scheme: PID gains auto-adjust in real-time based on flight phase and wind disturbance conditions — avoiding hard-coded parameters. Additionally, trained a YOLO-based pedestrian detector on a custom aerial-view dataset to identify survivors in the search zone, with detection confidence fed back into the mission planner to trigger loiter-and-report behavior.",
@@ -652,7 +652,7 @@ const pages: DetailPage[] = [
         },
       },
       {
-        date: { en: "2025.03 - 2025.06", zh: "2025.03 - 2025.06" },
+        date: { en: "2022.03 - 2022.06", zh: "2022.03 - 2022.06" },
         title: { en: "Project 2 — Industrial Process Control: Water Tank & Boiler Regulation", zh: "项目二 — 工业过程控制：水箱液位与锅炉温度调控" },
         body: {
           en: "Hands-on industrial control lab. Operated PID controllers on physical water tank and boiler systems with real sensors and actuators. Conducted system identification via step-response testing to derive plant transfer functions. Applied Ziegler-Nichols tuning rules to obtain initial PID parameters, then refined gains through iterative closed-loop testing. Compared P, PI, and PID control modes, analyzing steady-state error, overshoot, settling time, and disturbance rejection performance. Documented the full control engineering workflow from modeling to validation.",
@@ -660,7 +660,7 @@ const pages: DetailPage[] = [
         },
       },
       {
-        date: { en: "2024.09 - 2025.01", zh: "2024.09 - 2025.01" },
+        date: { en: "2023.09 - 2023.12", zh: "2023.09 - 2023.12" },
         title: { en: "Project 3 — MATLAB PID Simulation & Transfer Function Analysis", zh: "项目三 — MATLAB PID 仿真与传递函数分析" },
         body: {
           en: "Systematic controller design and analysis in MATLAB. Modeled various dynamic systems (first-order, second-order, time-delay) using transfer functions and state-space representations. Performed open-loop analysis (root locus, Bode plots, Nyquist diagrams) to assess stability margins, then designed PID compensators to meet target specifications. Conducted closed-loop step-response simulations, comparing Ziegler-Nichols, Cohen-Coon, and optimization-based tuning methods. Visualized the effect of each gain term (Kp, Ki, Kd) on rise time, overshoot, steady-state error, and oscillation damping.",
@@ -680,7 +680,7 @@ const pages: DetailPage[] = [
     ],
     pidSections: [
       {
-        period: "2025.10 - 2025.12",
+        period: "2026.02 - 2026.04",
         role: { en: "Master's Group Project", zh: "硕士课程小组项目" },
         title: { en: "UAV Search & Rescue — Adaptive PID + YOLO Detection", zh: "无人机搜救 — 自适应 PID + YOLO 行人检测" },
         body: { en: "Built a quadrotor UAV simulation in MuJoCo on Ubuntu for search-and-rescue missions. Designed a cascaded PID controller (position → velocity → attitude loops) for stable hover, autonomous takeoff/landing, and waypoint navigation. Integrated Gain Scheduling + PSO adaptive tuning so PID gains auto-adjust based on flight phase and wind conditions. Trained a YOLO pedestrian detector on aerial-view data to identify survivors and trigger loiter-and-report behavior.", zh: "在 Ubuntu 系统中基于 MuJoCo 搭建四旋翼无人机仿真模型，面向搜救任务。设计级联 PID 控制器（位置→速度→姿态回路），实现稳定悬停、自主起降和航点导航。集成增益调度 + PSO 自适应调参，PID 增益根据飞行阶段与风扰实时自动调整。基于航拍数据训练 YOLO 行人检测器，识别幸存者并触发悬停报告行为。" },
@@ -696,7 +696,7 @@ const pages: DetailPage[] = [
         mediaLabel2: "Fig. 2 — UAV path planning: waypoint navigation & autonomous trajectory generation",
       },
       {
-        period: "2025.03 - 2025.06",
+        period: "2022.03 - 2022.06",
         role: { en: "Industrial Control Lab", zh: "工业控制实验室" },
         title: { en: "Industrial Process Control — Water Tank & Boiler Regulation", zh: "工业过程控制 — 水箱液位与锅炉温度调控" },
         body: { en: "Hands-on PID control on physical water tank and boiler systems with real sensors and actuators. Performed system identification via step-response testing, applied Ziegler-Nichols tuning rules, and refined gains through iterative closed-loop testing. Compared P, PI, and PID modes on steady-state error, overshoot, settling time, and disturbance rejection.", zh: "在真实水箱液位和锅炉温度系统上操作 PID 控制器，使用真实传感器和执行器。通过阶跃响应测试进行系统辨识，应用 Ziegler-Nichols 整定法则获取初始 PID 参数，再通过迭代闭环测试优化增益。对比 P、PI、PID 三种控制模式的稳态误差、超调量、调节时间和抗扰性能。" },
@@ -712,7 +712,7 @@ const pages: DetailPage[] = [
         mediaLabel2: "Fig. 2 — PID parameter oscillation analysis: system response under gain variation",
       },
       {
-        period: "2024.09 - 2025.01",
+        period: "2023.09 - 2023.12",
         role: { en: "Course Project", zh: "课程项目" },
         title: { en: "MATLAB PID Simulation & Transfer Function Analysis", zh: "MATLAB PID 仿真与传递函数分析" },
         body: { en: "Built closed-loop control systems in MATLAB/Simulink by extending PID blocks and custom transfer function modules. Designed single-loop and multi-loop feedback architectures by writing system equations — constructing cascaded control paths, adding feedforward branches, and tuning Kp/Ki/Kd gains through iterative simulation. Analyzed output waveforms (step response, ramp tracking, disturbance rejection) on virtual oscilloscope scopes, observing how each parameter shift affected rise time, overshoot, settling time, and steady-state error. Compared Ziegler-Nichols and Cohen-Coon tuning rules against manual refinement to develop intuition for controller design trade-offs.", zh: "在 MATLAB/Simulink 中通过拓展 PID 模块与自定义传递函数模块搭建闭环控制系统。编写系统方程设计单回路与多回路反馈架构——构建级联控制路径、添加前馈分支，通过迭代仿真调优 Kp/Ki/Kd 增益。在虚拟示波器上分析输出波形（阶跃响应、斜坡跟踪、抗扰性能），观察每个参数变化对上升时间、超调量、调节时间和稳态误差的影响。对比 Ziegler-Nichols 与 Cohen-Coon 整定法则和手动优化，培养对控制器设计权衡的直觉。" },
@@ -756,7 +756,7 @@ const pages: DetailPage[] = [
         },
       },
       {
-        date: { en: "2023", zh: "2023" },
+        date: { en: "2021.11 - 2022.01", zh: "2021.11 - 2022.01" },
         title: { en: "Project 1 — Supermarket Management System (C Language)", zh: "项目一 — 小超市管理系统（C 语言）" },
         body: {
           en: "Built a full-featured supermarket management desktop application in C with a visual GUI. The system supports user registration and login, product browsing by category, shopping cart add/remove/modify, checkout with total calculation, and purchase history tracking. Designed modular data structures for users, products, and orders, with file-based persistence between sessions.",
@@ -764,7 +764,7 @@ const pages: DetailPage[] = [
         },
       },
       {
-        date: { en: "2023 - 2024", zh: "2023 - 2024" },
+        date: { en: "2022.10 - 2023.06", zh: "2022.10 - 2023.06" },
         title: { en: "Project 2 — Arduino Smart Car System", zh: "项目二 — Arduino 智能小车系统" },
         body: {
           en: "Developed an embedded smart car platform using Arduino as the main controller. Integrated ultrasonic sensors for obstacle avoidance, infrared sensors for line tracking, and DC motor drivers for differential steering control. Wrote low-level control code in C for sensor polling, motor PWM regulation, and real-time decision logic. The modular hardware-software architecture allows plug-and-play sensor swapping for different navigation modes.",
@@ -772,7 +772,7 @@ const pages: DetailPage[] = [
         },
       },
       {
-        date: { en: "2024", zh: "2024" },
+        date: { en: "2023.03 - 2023.09", zh: "2023.03 - 2023.09" },
         title: { en: "Project 3 — WeChat Mini Program + Smart Car Cloud Control", zh: "项目三 — 微信小程序 + 智能小车云端控制" },
         body: {
           en: "Built a WeChat Mini Program as the remote control interface for the Arduino smart car. The mini program connects to a cloud backend via MQTT protocol, sending motion commands (forward, backward, left, right, stop) that are relayed to the car in real time. Also supports cloud data logging — sensor readings and command history are stored and displayed in-app. This project bridged embedded hardware, IoT communication, and mobile frontend development into one integrated system.",
@@ -792,7 +792,7 @@ const pages: DetailPage[] = [
     ],
     codingSections: [
       {
-        period: "2024",
+        period: "2023.03 - 2023.09",
         role: { en: "Full-Stack + IoT Developer", zh: "全栈 + IoT 开发者" },
         title: { en: "WeChat Mini Program + Smart Car Cloud Control", zh: "微信小程序 + 智能小车云端控制" },
         body: { en: "Built a WeChat Mini Program as the remote control interface for an Arduino smart car, bridging mobile frontend, cloud backend, and embedded hardware into one integrated system. The mini program sends real-time motion commands via MQTT protocol and displays historical sensor data.", zh: "开发微信小程序作为 Arduino 智能小车的远程控制界面，将移动前端、云后端与嵌入式硬件打通为一体化系统。小程序通过 MQTT 协议发送实时运动指令并展示历史传感器数据。" },
@@ -808,7 +808,7 @@ const pages: DetailPage[] = [
         mediaLabel2: "Fig. 2 — Arduino embedded smart car: ultrasonic + infrared sensor hardware setup",
       },
       {
-        period: "2023",
+        period: "2021.11 - 2022.01",
         role: { en: "Desktop Application Developer", zh: "桌面应用开发者" },
         title: { en: "Supermarket Management System — C Language GUI App", zh: "超市管理系统 — C 语言 GUI 桌面应用" },
         body: { en: "Developed a full-featured desktop management application in C with a visual GUI, supporting user auth, product catalog browsing, shopping cart operations, and checkout. Modular data structures with file-based persistence for cross-session reliability.", zh: "用 C 语言开发了功能完善的超市管理桌面应用，带有可视化图形界面。系统支持用户注册与登录、按分类浏览商品、购物车增删改、结算并计算总价。设计了模块化数据结构，通过文件持久化保存会话间数据。" },
