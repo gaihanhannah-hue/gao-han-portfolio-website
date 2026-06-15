@@ -411,8 +411,8 @@ const pages: DetailPage[] = [
     slug: "robotics",
     label: { en: "Robotics", zh: "机器人控制" },
     short: {
-      en: "Humanoid MPC+WBC control, serpentine PPO gait optimization, dexterous hand ROS teleoperation.",
-      zh: "人形机器人MPC+WBC分层控制、蛇形PPO步态优化、灵巧手ROS遥操作。",
+      en: "Humanoid model replacement, serpentine PPO gait optimization, dexterous hand ROS integration.",
+      zh: "人形模型替换与MPC/WBC适配、蛇形机器人PPO步态优化、灵巧手ROS接口打通。",
     },
     title: {
       en: "Robotics Control & Simulation",
@@ -423,8 +423,8 @@ const pages: DetailPage[] = [
       zh: "分层控制、强化学习与整机运动协调。",
     },
     intro: {
-      en: "My robotics work spans humanoid bipedal control, serpentine robot reinforcement learning, and dexterous hand simulation — from MPC/WBC hierarchical controller tuning and PPO-based adaptive gait optimization to ROS-integrated teleoperation and coordinated whole-body motion.",
-      zh: "我的机器人经历涵盖人形机器人双层控制、蛇形机器人强化学习与灵巧手仿真协同——从 MPC/WBC 分层控制器参数整定、PPO 自适应步态优化到 ROS 遥操作与整机运动协调。",
+      en: "My robotics work centers on physics simulation and control adaptation: replacing humanoid models in MuJoCo/OpenLoong, training serpentine robot gait parameters with PPO, and integrating a 12-DoF dexterous hand into an existing RC-MC-MuJoCo ROS simulation stack.",
+      zh: "我的机器人项目集中在物理仿真与控制适配：基于 OpenLoong 完成人形机器人 MuJoCo 模型替换与 MPC/WBC 参数整定，基于 PPO 优化蛇形机器人非结构化地形步态，并将灵犀 12 自由度灵巧手接入公司存量 RC-MC-MuJoCo 三层 ROS 仿真链路。",
     },
     timeline: [
       {
@@ -444,7 +444,7 @@ const pages: DetailPage[] = [
         },
       },
     ],
-    skills: ["ROS 2", "MuJoCo", "Isaac Gym", "Sim-MuJoCo", "PPO", "SAC", "DDPG", "WPC", "MBC"],
+    skills: ["ROS", "MuJoCo", "Isaac Gym", "Isaac Lab", "PPO", "AMP", "MPC", "WBC", "OpenLoong"],
     diagram: {
       en: ["Simulation Model", "Controller", "ROS 2 Bridge", "Robot State Feedback"],
       zh: ["仿真模型", "控制器", "ROS 2 通信", "机器人状态反馈"],
@@ -458,27 +458,27 @@ const pages: DetailPage[] = [
       {
         period: "2024.04 - 2024.10",
         role: { en: "CAS | Research Assistant", zh: "中国科学院 | 科研助理" },
-        title: { en: "Humanoid Robot Hierarchical Control — MPC + WBC", zh: "人形机器人分层控制系统参数适配与优化" },
-        body: { en: "Responsible for full-parameter retuning and adaptation of the hierarchical control system — upper-level MPC trajectory planning and lower-level WBC whole-body force control — for iterative humanoid robot model replacement scenarios. Optimized MPC control parameters based on new robot body characteristics to generate smooth and stable whole-body motion reference trajectories. Debugged WBC whole-body control weights, joint torque parameters, and contact constraints to resolve body shaking and walking instability caused by model migration. Achieved stable upright walking and smooth motion output through coordinated dual-layer controller tuning.", zh: "针对人形机器人本体模型迭代替换场景，负责上层 MPC 轨迹规划、下层 WBC 全身力控的全套参数重新整定与适配工作。根据全新机器人本体特性，迭代优化 MPC 控制参数，输出平稳合理的整机运动参考轨迹；同时调试 WBC 全身控制权重、关节力矩参数与接触约束，解决模型更替带来的机身抖动、行走不稳等问题。通过双层控制器联调优化，匹配上下层控制响应特性，完成新模型步态适配，实现机器人稳定直立行走与平稳运动输出。" },
+        title: { en: "OpenLoong Humanoid Model Replacement — MPC + WBC", zh: "OpenLoong 双足人形机器人模型替换与控制适配" },
+        body: { en: "Reproduced the OpenLoong humanoid control project on Linux and used its MuJoCo walking demo as the baseline. Configured the CMake build directory, generated project build files, compiled the control demo, and launched the MuJoCo walking example to verify that the MPC+WBC closed-loop pipeline ran end-to-end. Replaced the original Qinglong model with a lab-developed biped by importing SolidWorks-derived mass, inertia, geometry, joint torque limits, collision, friction, and damping parameters. Updated the kinematic Jacobian and joint mappings for the new structure, then retuned MPC/ZMP balance weights, torso reference pose, WBC task priorities, joint stiffness, damping, and contact parameters to compensate for the shifted center of mass and recover stable closed-loop walking.", zh: "基于 Linux 与 MuJoCo 复现上海 OpenLoong 青龙双足开源工程，通过 CMake 配置 build 目录、生成工程构建文件、编译控制 demo，并启动 MuJoCo 行走示例，跑通原生 MPC 上层轨迹规划 + WBC 底层全身力矩分配的稳定闭环行走基线。随后将青龙模型替换为实验室自研双足机型，依据 SolidWorks 导出的尺寸、质量、惯性矩阵、关节力矩上限等参数更新 MuJoCo XML，并同步适配新机型雅克比矩阵与关节映射。针对新旧模型重心偏移，微调 MPC 的 ZMP 稳定项、躯干参考姿态，以及 WBC 任务优先级、关节刚度/阻尼和足底接触参数，最终实现自研机型在仿真中稳定闭环行走。" },
         bullets: {
-          en: ["MPC trajectory planning: iterative parameter optimization for new robot body characteristics", "WBC whole-body force control: weight tuning, joint torque & contact constraint debugging", "Dual-layer controller coordination — matched upper/lower response for stable bipedal walking"],
-          zh: ["MPC 轨迹规划：根据新机器人本体特性迭代优化控制参数", "WBC 全身力控：调试控制权重、关节力矩参数与接触约束", "双层控制器联调——匹配上下层控制响应，实现稳定双足行走"],
+          en: ["Local reproduction: used CMake to configure/build OpenLoong demos on Linux, then ran the MuJoCo MPC+WBC walking baseline", "Model replacement: updated XML dynamics, collision geometry, friction, damping, joint limits, and Jacobian mappings", "Control adaptation: retuned MPC ZMP weights/reference pose and WBC balance priority, stiffness, damping, and contact settings", "Real-time simulation tuning: aligned MuJoCo step size with MPC solve period and separated simulation/control process priorities"],
+          zh: ["本地复现：在 Linux 通过 CMake 配置 build、编译 OpenLoong demo，并跑通 MuJoCo 中 MPC+WBC 行走基线", "模型替换：更新 XML 动力学、碰撞几何、摩擦/阻尼、关节约束与新机型雅克比映射", "控制适配：调整 MPC 的 ZMP 权重/躯干参考姿态，以及 WBC 平衡任务优先级、刚度和阻尼", "仿真调参：对齐 MuJoCo 动力学步长与 MPC 求解周期，区分仿真进程和控制进程调度优先级"],
         },
         mediaType: "image",
         mediaSrc: "/assets/cas-openloong-original.png",
         mediaLabel: "Fig. 1 — Original OpenLoong humanoid robot model in Isaac Gym simulation",
         mediaType2: "image",
         mediaSrc2: "/assets/cas-model-replaced.png",
-        mediaLabel2: "Fig. 2 — Custom model replacement for WPC/MBC walking & jumping control",
+        mediaLabel2: "Fig. 2 — Custom model replacement for MPC/WBC walking control",
       },
       {
         period: "2024.11 - 2025.05",
         role: { en: "Graduation Project | Project Lead", zh: "毕业设计 | 项目负责人" },
-        title: { en: "Serpentine Robot — PPO Adaptive Gait Optimization", zh: "蛇形机器人强化学习自适应步态优化（PPO）" },
-        body: { en: "Addressed the poor generalization and terrain-induced stalling issues of traditional manual fixed-gait parameters in serpentine robots. Built multi-terrain simulation training environments using MuJoCo, defining gait step length, joint swing amplitude, and inter-joint phase difference as the optimizable action space for the PPO agent. Designed a composite reward function incorporating forward efficiency, body stability, and posture constraints. Through continuous agent-environment interaction, policy iteration, and strategy updates, the system autonomously converged on optimal gait parameter combinations — replacing manual fixed-parameter tuning and enabling adaptive motion rhythm adjustment to terrain variations for significantly improved traversal stability on uneven ground, slopes, and complex surfaces.", zh: "针对传统蛇形机器人人工固定步态参数泛化性差、复杂地形易卡顿卡死的问题，基于 PPO 近端策略优化算法完成仿生步态自适应优化。在 MuJoCo 中构建多地形仿真训练场景，将机器人行进步长、关节摆动幅度、相邻关节相位差设为智能体可优化动作空间；设计包含前进效率、机身平稳度、姿态约束的综合奖励函数，通过智能体与环境持续交互采样、策略迭代更新，自动收敛最优步态参数组合。摒弃传统人工固定参数调优方式，使机器人可根据地形变化自适应调整运动节律，显著提升凹凸路面、斜坡等复杂场景下的通行稳定性与环境适配能力。" },
+        title: { en: "Serpentine Robot — MuJoCo + PPO Adaptive Gait Optimization", zh: "蛇形机器人非结构化地形自适应步态优化（MuJoCo + PPO）" },
+        body: { en: "Built a MuJoCo training environment for a SolidWorks-designed serpentine robot, including XML dynamics, inertia, friction, collision constraints, transmission damping, and three unstructured terrains: rolling hills, obstacle forests, and rocky uneven ground. Used a low-dimensional 3D continuous action space for sinusoidal gait parameters — amplitude, angular frequency, and inter-joint phase difference — and mapped each PPO action to all joint targets through a traveling-wave gait equation. Added collision-force and ray-casting virtual ultrasonic sensing, then trained with Stable Baselines3 PPO using rewards for forward speed, stability, and collision avoidance.", zh: "基于 SolidWorks 完成蛇形机器人建模并转换为 MuJoCo XML，配置串联关节惯性、摩擦、碰撞约束与传动阻尼；独立搭建山地起伏、森林障碍、碎石凹凸三类非结构化地形。训练侧采用参数化步态降维，PPO 只输出正弦行波步态的 3 个连续变量：振幅 A、角频率 ω、相邻关节相位差 φ，再映射生成全身关节目标角。感知侧实现头部接触力阈值惩罚与 mj_ray 虚拟超声波测距两套方案，结合前进速度、姿态稳定和碰撞惩罚奖励函数，在 Stable Baselines3 中训练出适配复杂地形的稳定爬行步态。" },
         bullets: {
-          en: ["PPO-based adaptive gait optimization: multi-terrain MuJoCo simulation training", "Optimizable action space: step length, joint amplitude & inter-joint phase difference", "Composite reward: forward efficiency + body stability + posture constraints", "Autonomous convergence on optimal gait — adaptive rhythm adjustment to terrain changes"],
-          zh: ["PPO 自适应步态优化：MuJoCo 多地形仿真训练场景", "可优化动作空间：步长、关节摆动幅度、相邻关节相位差", "综合奖励函数：前进效率 + 机身平稳度 + 姿态约束", "自主收敛最优步态——根据地形变化自适应调整运动节律"],
+          en: ["Simulation setup: SolidWorks-to-MuJoCo XML model plus hills, obstacle forest, and rocky terrain scenes", "Perception options: head contact-force threshold via data.cfrc_ext and multi-direction mj_ray virtual ultrasonic sensing", "Action design: 3D continuous gait parameters A, omega, and phase difference mapped to all joints", "Training system: Stable Baselines3 PPO with comparisons against A2C, DDPG, and TD3 plus reward/speed/loss monitoring"],
+          zh: ["仿真搭建：SolidWorks 模型转 MuJoCo XML，并构建山地、森林障碍、碎石地面场景", "感知方案：基于 data.cfrc_ext 的头部接触力阈值，以及 mj_ray 多向虚拟超声波测距", "动作设计：3 维连续步态参数 A、ω、φ，经正弦行波公式映射到全部关节", "训练体系：基于 Stable Baselines3 训练 PPO，并横向对比 A2C、DDPG、TD3，监控奖励/速度/loss 曲线"],
         },
         mediaType: "video",
         mediaSrc: "/assets/serpentine-crawl.mp4",
@@ -490,11 +490,11 @@ const pages: DetailPage[] = [
       {
         period: "2025.09 - 2025.12",
         role: { en: "Agibot | Algorithm Simulation Intern", zh: "智元机器人 | 算法仿真实习生" },
-        title: { en: "Dexterous Hand Simulation & Coordinated Control", zh: "智元人形机器人灵巧手仿真与协同控制开发" },
-        body: { en: "Built a humanoid robot simulation environment based on Isaac Sim and MuJoCo, configuring active/passive joint transmission relationships and motion mapping for the dexterous hand, and establishing hand linkage motion constraint functions. Set up the full robot simulation control chain via ROS, integrating Xbox controller input for real-time teleoperation of the simulated dexterous hand — enabling grasping, gesture switching, and multi-pose adjustment. Designed hand-following coordination logic synchronized with walking and running states, adaptively matching hand motion to body movement rhythm for optimized whole-body coordination, achieving smooth and stable hand motion without lag or drift during locomotion.", zh: "基于 Isaac Sim、MuJoCo 搭建人形机器人仿真环境，完成灵巧手主动关节、从动关节传动关系与运动映射配置，建立手部联动运动约束函数。基于 ROS 搭建整机仿真控制链路，接入 Xbox 手柄实现仿真灵巧手的实时操控，可完成抓取、手势变换、多姿态调节等操作。同时设计人形机器人行走、跑动状态下的手部随动协同逻辑，匹配机身运动节奏自适应调整手部动作，优化整机运动协调性，实现运动过程中手部动作流畅稳定、无滞后偏移。" },
+        title: { en: "Agibot Lingxi 12-DoF Dexterous Hand — ROS Interface Integration", zh: "智元灵犀 12 自由度灵巧手仿真接口接入与维护" },
+        body: { en: "Extended Agibot's existing RC-MC-MuJoCo Linux simulation stack to support the Lingxi dexterous hand. Added bidirectional ROS Pub/Sub logic across RC-MC and MC-MuJoCo links, including Xbox gesture mappings, 12-dimensional hand joint target arrays, joint-state/force feedback, collision states, and safety checks for grasp limits and penetration. Adapted the MuJoCo XML dynamics model with one actively driven palm-root control joint and coupled passive finger joints; all active/passive joints are counted in the single-hand 12-DoF model. Also reproduced a humanoid soccer goalkeeper paper based on AMP, replaced the baseline humanoid with Lingxi XR, and supported Isaac Gym to Isaac Lab migration analysis.", zh: "在公司已有 RC 外设采集、MC 运动控制中间件、MuJoCo 仿真引擎三层 Linux 进程架构上，完成灵犀单只 12 自由度灵巧手接入。扩展 RC↔MC、MC↔MuJoCo 两组双向 ROS Pub/Sub 逻辑：手柄组合按键映射手势，MC 下发机身+手部一体化控制消息，新增 12 维手指关节目标位移数组，并回传手指接触力、碰撞状态和关节反馈；同时对齐消息结构、物理单位、发布频率、queue_size、时间戳与异常保护逻辑。MuJoCo 侧完成灵巧手 XML 动力学适配：手掌根部总控关节主动驱动，其余手指关节从动耦合但同样计入自由度，单手合计 12 自由度，并调试握拳、松开、比耶、比心等拟人手势与整机行走/踢球联动。同步复现港大人形足球守门论文的 AMP 训练流程，替换为灵犀 XR 整机，并参与 Isaac Gym 向 Isaac Lab 的迁移接口梳理。" },
         bullets: {
-          en: ["Isaac Sim + MuJoCo simulation: dexterous hand joint transmission & motion mapping", "ROS control chain + Xbox teleoperation: grasping, gesture switching & pose adjustment", "Hand-body coordination: gait-synchronized hand motion for stable whole-body locomotion"],
-          zh: ["Isaac Sim + MuJoCo 仿真：灵巧手关节传动关系与运动映射配置", "ROS 控制链路 + Xbox 手柄遥操作：抓取、手势变换与多姿态调节", "手部随动协同：匹配步态节奏的手部动作，实现整机运动协调"],
+          en: ["ROS interface alignment: message schema, joint ordering, radians/Newtons units, timestamps, queue sizes, and exception handling", "12-DoF hand dynamics: active palm-root control plus linearly coupled passive finger joints counted as independent DoFs", "Communication debugging: downsampled/filtered joystick input, enlarged queues, isolated CPU cores, and dropped stale commands to reduce packet loss", "Humanoid soccer work: reproduced AMP baseline, replaced the full robot model with Lingxi XR, and mapped observations/actions for Isaac Gym to Isaac Lab migration"],
+          zh: ["ROS 接口对齐：统一消息结构、关节顺序、弧度/牛顿单位、时间戳、队列缓存与异常保护规则", "12 自由度动力学：主动手掌根关节 + 线性耦合从动手指关节，主动/从动关节均计入自由度", "通信优化：手柄信号降采样滤波、扩容队列、CPU 核心隔离、过滤过期指令，降低高频丢包和卡顿", "足球仿真迁移：复现 AMP 基线，替换为灵犀 XR 整机，梳理 Isaac Gym 到 Isaac Lab 的观测/动作接口差异"],
         },
         mediaType: "image",
         mediaSrc: "/assets/agibot-motion-control.jpg",
