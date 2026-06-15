@@ -524,8 +524,16 @@ const pages: DetailPage[] = [
     },
     timeline: [
       {
+        date: { en: "2025.11 - 2025.12", zh: "2025.11 - 2025.12" },
+        title: { en: "Project 1 — Transformer-Based Tiny GPT", zh: "项目一 — 基于 Transformer 搭建的小型 GPT" },
+        body: {
+          en: "Built a small GPT project from scratch to understand the full path from data preparation to training and deployment. The project uses Hugging Face Datasets to prepare a training corpus, implements a BPE tokenizer, and trains a PyTorch decoder-only TinyGPT for next-token prediction. The training workflow includes loss tracking, checkpoint saving, and resume training. A FastAPI backend and Web Demo connect the trained model to an interactive browser interface for prompt input, generation controls, model information, loss curves, and simple short-term memory.",
+          zh: "从零实现了一个小型 GPT 项目，用来理解模型从数据准备、训练到部署演示的完整流程。项目接入 Hugging Face Datasets 处理语料，实现 BPE tokenizer，并用 PyTorch 手写 decoder-only TinyGPT 完成 next-token prediction。训练流程包含 loss 记录、checkpoint 保存和断点续训。最后通过 FastAPI 后端和 Web Demo 将训练好的模型接入浏览器界面，支持 prompt 输入、生成参数调节、模型信息查看、loss 曲线展示和简单短期记忆。",
+        },
+      },
+      {
         date: { en: "2025.11 - 2026.06", zh: "2025.11 - 2026.06" },
-        title: { en: "Project 1 — Education Agent: RAG + Document-to-PPT Pipeline", zh: "项目一 — 教育类 Agent：RAG + 文档转 PPT 管线" },
+        title: { en: "Project 2 — Education Agent: RAG + Document-to-PPT Pipeline", zh: "项目二 — 教育类 Agent：RAG + 文档转 PPT 管线" },
         body: {
           en: "Built a locally deployed, private RAG-based Education Agent. Users can ask questions against an ingested knowledge base, upload documents, and receive auto-generated PPT presentations as structured output. The pipeline integrates LangChain for retrieval, LLM/VLM for content generation, and a modular orchestration layer for workflow control. The entire system runs in a private repository environment, designed for educational use cases where data privacy matters.",
           zh: "搭建了本地化部署的私有 RAG 教育类 Agent。用户可以基于已摄入的知识库进行问答，上传文档后自动生成结构化的 PPT 演示文稿。管线整合了 LangChain 进行检索、LLM/VLM 进行内容生成，以及模块化编排层进行工作流控制。整套系统运行在私有化仓库环境中，面向对数据隐私有要求的教育场景。",
@@ -533,7 +541,7 @@ const pages: DetailPage[] = [
       },
       {
         date: { en: "2026.05 - 2026.06", zh: "2026.05 - 2026.06" },
-        title: { en: "Project 2 — Portfolio Website: AI-Assisted Web Coding", zh: "项目二 — 简历作品集网站：AI 辅助 Web 开发" },
+        title: { en: "Project 3 — Portfolio Website: AI-Assisted Web Coding", zh: "项目三 — 简历作品集网站：AI 辅助 Web 开发" },
         body: {
           en: "Designed and delivered this portfolio website end-to-end using an AI-assisted development workflow. Acting as architect, I defined the visual identity, information hierarchy, interactive sticker-map navigation, and bilingual content strategy. Claude Code and Cursor handled implementation under my direction — I focused on architecture decisions, design refinement, and targeted code-level adjustments where the AI needed guidance. The result is a fully responsive, bilingual React site that reflects both my engineering taste and hands-on proficiency with modern AI development tooling.",
           zh: "使用 AI 辅助开发工作流，从零设计并交付了这份简历作品集网站。我作为架构师，定义了视觉风格、信息层级、贴纸地图交互导航和中英双语内容策略。Claude Code 和 Cursor 在我的指导下完成工程实现——我专注于架构决策、设计调优，以及在 AI 需要引导时进行针对性的代码级调整。最终交付了一个全响应式、双语的 React 网站，既体现了我的工程品味，也展示了我在现代 AI 开发工具上的实操能力。",
@@ -541,7 +549,7 @@ const pages: DetailPage[] = [
       },
       {
         date: { en: "2026.02 - 2026.04", zh: "2026.02 - 2026.04" },
-        title: { en: "Project 3 — AIoT Smart Bathroom: LLM-Driven Environmental Control", zh: "项目三 — AIoT 智能浴室：大模型驱动的环境调控" },
+        title: { en: "Project 4 — AIoT Smart Bathroom: LLM-Driven Environmental Control", zh: "项目四 — AIoT 智能浴室：大模型驱动的环境调控" },
         body: {
           en: "Built an AIoT smart bathroom system on the ESP32 platform, integrating a sensor array — temperature/humidity, PIR human presence, infrared, CO2, PM2.5, and water leakage sensors — for real-time environmental perception. All sensor data streams to a cloud backend and a custom-built web dashboard for live visualization and historical trend charting.\n\nThe core differentiator: an LLM decision layer that makes this more than a rule engine. Rather than hard-coding if-else thresholds, the LLM interprets multi-sensor context holistically — it understands that 'high temperature + high humidity + human present' means a different action than 'high temperature + empty room'. It can reason across time-series patterns ('CO2 has been climbing for 20 minutes despite ventilation') and generate natural-language explanations for every automated action.\n\nWhen the LLM detects anomaly patterns — e.g. temperature exceeding a user-adaptive comfort threshold combined with rising humidity — it autonomously triggers coordinated responses: activating exhaust fans, adjusting water valves, or sending alerts. Users can also converse with the system in plain language ('Is the bathroom comfortable right now?' / 'Why did the fan just turn on?'), and the LLM provides contextual answers grounded in real-time sensor data. The model is the reasoning brain — sensors are its senses.",
           zh: "基于 ESP32 平台搭建了 AIoT 智能浴室系统，集成传感器阵列——温湿度、人体红外、CO2、PM2.5、漏水检测等——进行实时环境感知。所有传感器数据上传至云后端，并在自建 Web 可视化仪表盘上实时展示和历史趋势绘图。\n\n核心差异化：LLM 决策层让这套系统远不止是一个规则引擎。不同于硬编码的 if-else 阈值判断，大模型从整体上解读多传感器上下文——它理解「高温+高湿+有人」和「高温+空房间」意味着完全不同的应对策略。它能跨时间序列模式进行推理（「尽管开着通风，CO2 已经持续上升了 20 分钟」），并为每一次自动操作生成自然语言解释。\n\n当 LLM 检测到异常模式——例如温度超过用户自适应舒适阈值且湿度同步攀升——它自主触发协调响应：启动排风扇、调节水阀、或发送预警通知。用户也可以用自然语言与系统对话（「现在浴室舒服吗？」/「风扇为什么刚刚开了？」），LLM 基于实时传感器数据给出有上下文依据的回答。模型是推理大脑——传感器是它的感官。",
@@ -564,7 +572,7 @@ const pages: DetailPage[] = [
         },
       },
     ],
-    skills: ["MCP", "LangChain", "RAG", "LLM", "VLM", "YOLO", "Ray", "Claude Code", "Cursor", "ESP32", "IoT", "MQTT", "Python", "React", "TypeScript"],
+    skills: ["MCP", "LangChain", "RAG", "LLM", "VLM", "YOLO", "Ray", "Transformer", "TinyGPT", "BPE Tokenizer", "Self-Attention", "PyTorch", "Hugging Face", "FastAPI", "Claude Code", "Cursor", "ESP32", "IoT", "MQTT", "Python", "React", "TypeScript"],
     diagram: {
       en: ["Sensors & IoT", "Cloud Data Pipeline", "LLM Reasoning", "Automated Action", "Natural Language UI"],
       zh: ["传感器 & IoT", "云端数据管线", "大模型推理", "自动执行", "自然语言交互"],
@@ -575,6 +583,22 @@ const pages: DetailPage[] = [
       { en: "Smart bathroom — LLM conversation interface", zh: "智能浴室 — LLM 对话交互界面" },
     ],
     agentsSections: [
+      {
+        period: "2025.11 - 2025.12",
+        role: { en: "Transformer Learning Project", zh: "Transformer 学习型项目" },
+        title: { en: "Transformer-Based Tiny GPT", zh: "基于 Transformer 搭建的小型 GPT" },
+        body: { en: "Built a small GPT project from scratch to understand the full path from data preparation to training and deployment. The project uses Hugging Face Datasets to prepare a training corpus, implements a BPE tokenizer, and trains a PyTorch decoder-only TinyGPT for next-token prediction. The training workflow includes loss tracking, checkpoint saving, and resume training. A FastAPI backend and Web Demo connect the trained model to an interactive browser interface for prompt input, generation controls, model information, loss curves, and simple short-term memory.", zh: "从零实现了一个小型 GPT 项目，用来理解模型从数据准备、训练到部署演示的完整流程。项目接入 Hugging Face Datasets 处理语料，实现 BPE tokenizer，并用 PyTorch 手写 decoder-only TinyGPT 完成 next-token prediction。训练流程包含 loss 记录、checkpoint 保存和断点续训。最后通过 FastAPI 后端和 Web Demo 将训练好的模型接入浏览器界面，支持 prompt 输入、生成参数调节、模型信息查看、loss 曲线展示和简单短期记忆。" },
+        bullets: {
+          en: ["Prepared the corpus with Hugging Face Datasets, supporting configurable dataset name, split, text column, basic cleaning, and export to corpus.txt", "Implemented BPE tokenization so training and generation share the same learned token-to-id mapping", "Built TinyGPT in PyTorch with token/position embeddings, causal multi-head self-attention, FFN, LayerNorm, residual connections, and stacked Transformer Blocks", "Packaged training with gradient clipping, learning-rate scheduling, train/val loss logging, loss curves, best/latest checkpoints, resume training, and run-level artifact management", "Deployed FastAPI endpoints and a Web Demo for prompt input, generation controls, model status, loss preview, generated output, and API-layer short-term memory"],
+          zh: ["使用 Hugging Face Datasets 准备语料，支持配置数据集名称、split、文本列，完成基础清洗并导出 corpus.txt", "实现 BPE tokenization，让训练和生成共用同一套 token-to-id 映射，保证编码一致", "用 PyTorch 手写 TinyGPT：token/position embedding、causal multi-head self-attention、FFN、LayerNorm、残差连接和多层 Transformer Block", "封装训练流程：gradient clipping、learning-rate schedule、train/val loss 记录、loss 曲线、best/latest checkpoint、断点续训和 run 级产物管理", "部署 FastAPI 接口和 Web Demo，支持 prompt 输入、参数调节、模型状态、loss 预览、生成结果展示和 API 层短期记忆"],
+        },
+        mediaType: "image",
+        mediaSrc: "/assets/tinygpt-demo-api.png",
+        mediaLabel: "Fig. 1 — TinyGPT Web Demo: local FastAPI generation interface with checkpoint metadata",
+        mediaType2: "image",
+        mediaSrc2: "/assets/tinygpt-demo-local.png",
+        mediaLabel2: "Fig. 2 — TinyGPT Local Demo: prompt controls, generated output, and training loss preview",
+      },
       {
         period: "2025.11 - 2026.06",
         role: { en: "AI Agent Developer", zh: "AI Agent 开发工程师" },
