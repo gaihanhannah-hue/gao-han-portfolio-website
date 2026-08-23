@@ -206,7 +206,7 @@ const pages: DetailPage[] = [
         major: { en: "Mechanical and Automation Engineering", zh: "机械与自动化工程" },
         logo: "/assets/self-introduction/cuhk-logo.png",
         url: "https://www.cuhk.edu.hk",
-        period: "2025.09 - 2026.06",
+        period: "2025.09 - 2026.10",
         research: {
           en: "AI Agent R&D for image generation and PPT generation under an AI Agent field supervisor.",
           zh: "在 AI Agent 领域导师指导下，从事图像生成与 PPT 生成的 AI Agent 研发。",
@@ -519,8 +519,8 @@ const pages: DetailPage[] = [
       zh: "从 RAG 检索管线到 AI 辅助全栈开发。",
     },
     intro: {
-      en: "My Agent work spans three directions: building multimodal RAG pipelines that turn documents into structured outputs, embedding LLM reasoning into physical IoT systems for autonomous control, and designing composable Agent architectures with MCP (Model Context Protocol) for tool-augmented workflows — connecting LLMs to external APIs, data sources, and real-world actions. This portfolio website is itself a product of AI-assisted development using Claude Code and Cursor under my architectural direction.\n\nBelow are the key projects that define how I think about and build with AI Agents.",
-      zh: "我的 Agent 实践分为三个方向：一是构建多模态 RAG 管线，将文档转化为结构化输出；二是将大模型推理嵌入物理 IoT 系统，实现自主环境调控；三是设计可组合的 Agent 架构，通过 MCP（Model Context Protocol）连接 LLM 与外部工具、API 和数据源，实现工具增强工作流。你现在看到的这个作品集网站本身就是在我的架构指导下，使用 Claude Code 和 Cursor 进行 AI 辅助开发的产物。\n\n以下是我在 AI Agent 方向的核心项目与实践经历。",
+      en: "My Agent work spans four directions: building multimodal RAG pipelines that turn documents into structured outputs, embedding LLM reasoning into physical IoT systems for autonomous control, designing composable Agent architectures with MCP (Model Context Protocol) for tool-augmented workflows — connecting LLMs to external APIs, data sources, and real-world actions, and AI-Agent evaluation & test engineering — sample governance, confusion-matrix model evaluation, and automated testing that safeguard delivery quality. This portfolio website is itself a product of AI-assisted development using Claude Code and Cursor under my architectural direction.\n\nBelow are the key projects and experiences that define how I think about and build with AI Agents — including a playful Electron desktop pet of my own cat.",
+      zh: "我的 Agent 实践分为四个方向：一是构建多模态 RAG 管线，将文档转化为结构化输出；二是将大模型推理嵌入物理 IoT 系统，实现自主环境调控；三是设计可组合的 Agent 架构，通过 MCP（Model Context Protocol）连接 LLM 与外部工具、API 和数据源，实现工具增强工作流；四是 AI-Agent 评测与测试工程——样本治理、混淆矩阵模型评测与自动化测试，保障版本交付质量。你现在看到的这个作品集网站本身就是在我的架构指导下，使用 Claude Code 和 Cursor 进行 AI 辅助开发的产物。\n\n以下是我在 AI Agent 方向的核心项目与实践经历——包括一只用 Electron 从零打造的自家小猫桌宠。",
     },
     timeline: [
       {
@@ -572,7 +572,7 @@ const pages: DetailPage[] = [
         },
       },
     ],
-    skills: ["MCP", "LangChain", "RAG", "LLM", "VLM", "YOLO", "Ray", "Transformer", "TinyGPT", "BPE Tokenizer", "Self-Attention", "PyTorch", "Hugging Face", "FastAPI", "Claude Code", "Cursor", "ESP32", "IoT", "MQTT", "Python", "React", "TypeScript"],
+    skills: ["MCP", "LangChain", "RAG", "LLM", "VLM", "YOLO", "Ray", "Transformer", "TinyGPT", "BPE Tokenizer", "Self-Attention", "PyTorch", "Hugging Face", "FastAPI", "AI Evaluation", "Confusion Matrix", "Test Automation", "Claude Code", "Cursor", "ESP32", "IoT", "MQTT", "Python", "React", "TypeScript", "Electron", "Node.js"],
     diagram: {
       en: ["Sensors & IoT", "Cloud Data Pipeline", "LLM Reasoning", "Automated Action", "Natural Language UI"],
       zh: ["传感器 & IoT", "云端数据管线", "大模型推理", "自动执行", "自然语言交互"],
@@ -584,20 +584,20 @@ const pages: DetailPage[] = [
     ],
     agentsSections: [
       {
-        period: "2025.11 - 2025.12",
-        role: { en: "Transformer Learning Project", zh: "Transformer 学习型项目" },
-        title: { en: "Transformer-Based Tiny GPT", zh: "基于 Transformer 搭建的小型 GPT" },
-        body: { en: "Built a small GPT project from scratch to understand the full path from data preparation to training and deployment. The project uses Hugging Face Datasets to prepare a training corpus, implements a BPE tokenizer, and trains a PyTorch decoder-only TinyGPT for next-token prediction. The training workflow includes loss tracking, checkpoint saving, and resume training. A FastAPI backend and Web Demo connect the trained model to an interactive browser interface for prompt input, generation controls, model information, loss curves, and simple short-term memory.", zh: "从零实现了一个小型 GPT 项目，用来理解模型从数据准备、训练到部署演示的完整流程。项目接入 Hugging Face Datasets 处理语料，实现 BPE tokenizer，并用 PyTorch 手写 decoder-only TinyGPT 完成 next-token prediction。训练流程包含 loss 记录、checkpoint 保存和断点续训。最后通过 FastAPI 后端和 Web Demo 将训练好的模型接入浏览器界面，支持 prompt 输入、生成参数调节、模型信息查看、loss 曲线展示和简单短期记忆。" },
+        period: "2026.05 - 2026.07",
+        role: { en: "Industry AI Agent Developer", zh: "行业 AI Agent 开发工程师" },
+        title: { en: "SENGITAL — Industry AI Agent Development Intern", zh: "SENGITAL — 行业 AI Agent 开发实习" },
+        body: { en: "Developed industry-specific Agents on poffices.AI, contributing to visual workflow orchestration, modular feature packaging and agile low-code application delivery. Built custom Blocks and configured node-based logic for business scenarios, improving workflow reuse and scenario-specific processing efficiency. Embedded Python scripts for complex business logic, and supported scenario adaptation plus online performance optimization for scalable AI Agent deployment.", zh: "在 poffices.AI 平台上开发面向行业的 AI Agent，参与可视化工作流编排、模块化功能封装与敏捷低代码应用交付。构建自定义 Blocks 并配置面向业务场景的节点式逻辑，提升工作流复用性与场景化处理效率。嵌入 Python 脚本实现复杂业务逻辑，支持场景适配与线上性能优化。" },
         bullets: {
-          en: ["Prepared the corpus with Hugging Face Datasets, supporting configurable dataset name, split, text column, basic cleaning, and export to corpus.txt", "Implemented BPE tokenization so training and generation share the same learned token-to-id mapping", "Built TinyGPT in PyTorch with token/position embeddings, causal multi-head self-attention, FFN, LayerNorm, residual connections, and stacked Transformer Blocks", "Packaged training with gradient clipping, learning-rate scheduling, train/val loss logging, loss curves, best/latest checkpoints, resume training, and run-level artifact management", "Deployed FastAPI endpoints and a Web Demo for prompt input, generation controls, model status, loss preview, generated output, and API-layer short-term memory"],
-          zh: ["使用 Hugging Face Datasets 准备语料，支持配置数据集名称、split、文本列，完成基础清洗并导出 corpus.txt", "实现 BPE tokenization，让训练和生成共用同一套 token-to-id 映射，保证编码一致", "用 PyTorch 手写 TinyGPT：token/position embedding、causal multi-head self-attention、FFN、LayerNorm、残差连接和多层 Transformer Block", "封装训练流程：gradient clipping、learning-rate schedule、train/val loss 记录、loss 曲线、best/latest checkpoint、断点续训和 run 级产物管理", "部署 FastAPI 接口和 Web Demo，支持 prompt 输入、参数调节、模型状态、loss 预览、生成结果展示和 API 层短期记忆"],
+          en: ["Developed industry Agents on poffices.AI — visual workflow orchestration & low-code delivery", "Built custom Blocks & node-based logic for business scenarios, improving workflow reuse", "Embedded Python scripts for complex business rules with scenario adaptation", "Online performance optimization for scalable AI Agent deployment"],
+          zh: ["在 poffices.AI 平台开发行业 Agent — 可视化工作流编排与低代码交付", "构建自定义 Blocks 与节点式业务逻辑，提升工作流复用效率", "嵌入 Python 脚本处理复杂业务规则，支持场景适配", "线上性能优化，实现可扩展的 AI Agent 部署"],
         },
         mediaType: "image",
-        mediaSrc: "/assets/tinygpt-demo-api.png",
-        mediaLabel: "Fig. 1 — TinyGPT Web Demo: local FastAPI generation interface with checkpoint metadata",
+        mediaSrc: "/assets/agent-poffices-workflow.png",
+        mediaLabel: "Fig. 1 — poffices.AI visual workflow orchestration: Agent pipeline design",
         mediaType2: "image",
-        mediaSrc2: "/assets/tinygpt-demo-local.png",
-        mediaLabel2: "Fig. 2 — TinyGPT Local Demo: prompt controls, generated output, and training loss preview",
+        mediaSrc2: "/assets/agent-poffices-deploy.png",
+        mediaLabel2: "Fig. 2 — Agent deployment interface: modular Blocks & node-based logic",
       },
       {
         period: "2025.11 - 2026.06",
@@ -616,20 +616,49 @@ const pages: DetailPage[] = [
         mediaLabel2: "Fig. 2 — Auto-generated structured PPT from uploaded documents via LLM/VLM pipeline",
       },
       {
-        period: "2026.05 - 2026.07",
-        role: { en: "Industry AI Agent Developer", zh: "行业 AI Agent 开发工程师" },
-        title: { en: "SENGITAL — Industry AI Agent Development Intern", zh: "SENGITAL — 行业 AI Agent 开发实习" },
-        body: { en: "Developed industry-specific Agents on poffices.AI, contributing to visual workflow orchestration, modular feature packaging and agile low-code application delivery. Built custom Blocks and configured node-based logic for business scenarios, improving workflow reuse and scenario-specific processing efficiency. Embedded Python scripts for complex business logic, and supported scenario adaptation plus online performance optimization for scalable AI Agent deployment.", zh: "在 poffices.AI 平台上开发面向行业的 AI Agent，参与可视化工作流编排、模块化功能封装与敏捷低代码应用交付。构建自定义 Blocks 并配置面向业务场景的节点式逻辑，提升工作流复用性与场景化处理效率。嵌入 Python 脚本实现复杂业务逻辑，支持场景适配与线上性能优化。" },
+        period: "2026.08 - 2026.10",
+        role: { en: "Yuanbao Shuke | AI Evaluation Engineer (Test Development)", zh: "元保数科 | AI 评测工程师（测试开发方向）" },
+        title: { en: "Insurance Customer-Service AI-Agent — Evaluation & Test Engineering", zh: "保险客服 AI-Agent — 评测与测试工程" },
+        body: { en: "Served as an AI Evaluation Engineer (test-development track) at Yuanbao Shuke, owning evaluation and quality assurance across the insurance customer-service AI-Agent delivery lifecycle: from business/product alignment, sample governance, and dataset construction, to model performance evaluation, automated interface & regression testing, and internal efficiency tooling — covering the full data-model-inference chain.", zh: "在元保数科担任 AI 评测工程师（测试开发方向），面向保险客服 AI-Agent 的版本交付全流程负责评测与质量保障：从业务/产品对接、样本治理与数据集建设，到模型效果评测、自动化接口与回归测试，再到效能工具开发，覆盖「数据—模型—推理链路」全链路的测试与评估工作。" },
         bullets: {
-          en: ["Developed industry Agents on poffices.AI — visual workflow orchestration & low-code delivery", "Built custom Blocks & node-based logic for business scenarios, improving workflow reuse", "Embedded Python scripts for complex business rules with scenario adaptation", "Online performance optimization for scalable AI Agent deployment"],
-          zh: ["在 poffices.AI 平台开发行业 Agent — 可视化工作流编排与低代码交付", "构建自定义 Blocks 与节点式业务逻辑，提升工作流复用效率", "嵌入 Python 脚本处理复杂业务规则，支持场景适配", "线上性能优化，实现可扩展的 AI Agent 部署"],
+          en: ["Aligned with business & product teams on insurance customer-service AI-Agent sample governance — owning end-to-end data pipeline control and building high-quality training & evaluation datasets", "Designed model input/output specifications; evaluated model effectiveness via confusion-matrix analysis, delivering evaluation conclusions that drove model iteration", "Wrote automation scripts for interface and regression testing covering both business logic and model inference paths, safeguarding AI-Agent release quality", "Contributed to internal efficiency tooling; implemented full-chain scenario-based AI-Agent testing, boosting overall team productivity"],
+          zh: ["对接业务与产品完成保险客服 AI-Agent 样本治理工作，统筹数据全流程管控，构建高质量训练与评测数据集", "设计模型入参出参规范，依托混淆矩阵开展模型效果评估，输出评测结论，驱动模型迭代优化", "编写自动化脚本完成接口及回归测试，覆盖业务与模型推理链路，保障 AI-Agent 版本交付质量", "参与内部效能提效工具开发，落地 AI-Agent 全链路场景化测试，提升团队整体作业效率"],
         },
         mediaType: "image",
-        mediaSrc: "/assets/agent-poffices-workflow.png",
-        mediaLabel: "Fig. 1 — poffices.AI visual workflow orchestration: Agent pipeline design",
+        mediaSrc: undefined,
+        mediaLabel: "",
+      },
+      {
+        period: "2026.07 - 2026.08",
+        role: { en: "Personal Project | Built from Scratch", zh: "个人项目 | 从零搭建" },
+        title: { en: "PawPause — Turning My Cat into an Electron Desktop Pet", zh: "PawPause 桌宠 — 把我家小猫做成桌面宠物" },
+        body: { en: "Built \"PawPause\" from scratch with Electron — a Windows desktop pet of my own cat. A transparent, frameless, always-on-top kitten lives on the desktop: breathing and blinking when idle, reacting randomly to quick taps (offering a paw or dozing off), meowing on its own every dozen-or-so seconds when bored, and popping a \"Zzz\" bubble when asleep. Hold and drag to carry it anywhere on screen. Also implemented a system tray menu (hide/show, reset to corner, launch at startup, quit), single-instance locking, and portable packaging via electron-builder, iterating versions 0.1.0 → 0.3.3. I even wrote a QA capture harness that drives each state machine through pre-wired test hooks and captures frame-by-frame screenshots for regression verification — applying my day-job test-engineering habits to my own project.", zh: "从零用 Electron 把我家小猫做成了一只 Windows 桌宠「PawPause」。桌面上住着一只透明无边框、永远置顶的小猫：待机时会呼吸、眨眼，被轻点会随机反应（伸出爪子或打盹），无聊时每隔十几秒会自发「喵」一声，睡觉时冒出 Zzz 气泡；按住拖拽可以把它拎到屏幕任意位置。配套实现了系统托盘菜单（隐藏/显示、一键归位右下角、开机自启、退出）、单实例锁和 electron-builder 便携版打包，迭代了 0.1.0 → 0.3.3 多个版本。还专门写了一套 QA 自动捕获脚本，通过预埋测试钩子驱动各状态机并逐帧截图回归验证——把平日测试开发的经验用在了自己的项目上。" },
+        bullets: {
+          en: ["From-scratch Electron app: transparent frameless always-on-top window, hidden from taskbar, resident via tray menu", "Cat state machine: idle breathing/blinking (webp animation), random quick-tap reactions (paw or doze), spontaneous meows when idle, \"Zzz\" sleep bubble", "Interaction design: press-and-drag movement across the screen (pointer-distance threshold separates tap from drag), right-click menu, single-instance lock", "Engineering: electron-builder portable packaging, iterated v0.1.0 → v0.3.3; pre-wired QA hooks drive states and capture screenshots for regression checks"],
+          zh: ["从零搭建 Electron 应用：透明无边框置顶窗口、无任务栏图标，配合托盘菜单常驻后台", "猫咪状态机：待机呼吸/眨眼（webp 动画）、轻点随机反应（伸爪/打盹）、无聊时随机喵叫、睡觉 Zzz 气泡", "交互设计：按住拖拽全屏移动（指针位移阈值区分「点击」与「拖拽」）、右键菜单、单实例锁防重复启动", "工程化：electron-builder 便携版打包，0.1.0 → 0.3.3 版本迭代；预埋 QA 测试钩子自动驱动状态并截图回归验证"],
+        },
+        mediaType: "image",
+        mediaSrc: "/assets/cat-pet-idle.gif",
+        mediaLabel: "Fig. 1 — Idle animation: breathing & blinking loop",
         mediaType2: "image",
-        mediaSrc2: "/assets/agent-poffices-deploy.png",
-        mediaLabel2: "Fig. 2 — Agent deployment interface: modular Blocks & node-based logic",
+        mediaSrc2: "/assets/cat-pet-concept.jpg",
+        mediaLabel2: "Fig. 2 — PawPause concept render",
+      },
+      {
+        period: "2025.11 - 2025.12",
+        role: { en: "Transformer Learning Project", zh: "Transformer 学习型项目" },
+        title: { en: "Transformer-Based Tiny GPT", zh: "基于 Transformer 搭建的小型 GPT" },
+        body: { en: "Built a small GPT project from scratch to understand the full path from data preparation to training and deployment. The project uses Hugging Face Datasets to prepare a training corpus, implements a BPE tokenizer, and trains a PyTorch decoder-only TinyGPT for next-token prediction. The training workflow includes loss tracking, checkpoint saving, and resume training. A FastAPI backend and Web Demo connect the trained model to an interactive browser interface for prompt input, generation controls, model information, loss curves, and simple short-term memory.", zh: "从零实现了一个小型 GPT 项目，用来理解模型从数据准备、训练到部署演示的完整流程。项目接入 Hugging Face Datasets 处理语料，实现 BPE tokenizer，并用 PyTorch 手写 decoder-only TinyGPT 完成 next-token prediction。训练流程包含 loss 记录、checkpoint 保存和断点续训。最后通过 FastAPI 后端和 Web Demo 将训练好的模型接入浏览器界面，支持 prompt 输入、生成参数调节、模型信息查看、loss 曲线展示和简单短期记忆。" },
+        bullets: {
+          en: ["Prepared the corpus with Hugging Face Datasets, supporting configurable dataset name, split, text column, basic cleaning, and export to corpus.txt", "Implemented BPE tokenization so training and generation share the same learned token-to-id mapping", "Built TinyGPT in PyTorch with token/position embeddings, causal multi-head self-attention, FFN, LayerNorm, residual connections, and stacked Transformer Blocks", "Packaged training with gradient clipping, learning-rate scheduling, train/val loss logging, loss curves, best/latest checkpoints, resume training, and run-level artifact management", "Deployed FastAPI endpoints and a Web Demo for prompt input, generation controls, model status, loss preview, generated output, and API-layer short-term memory"],
+          zh: ["使用 Hugging Face Datasets 准备语料，支持配置数据集名称、split、文本列，完成基础清洗并导出 corpus.txt", "实现 BPE tokenization，让训练和生成共用同一套 token-to-id 映射，保证编码一致", "用 PyTorch 手写 TinyGPT：token/position embedding、causal multi-head self-attention、FFN、LayerNorm、残差连接和多层 Transformer Block", "封装训练流程：gradient clipping、learning-rate schedule、train/val loss 记录、loss 曲线、best/latest checkpoint、断点续训和 run 级产物管理", "部署 FastAPI 接口和 Web Demo，支持 prompt 输入、参数调节、模型状态、loss 预览、生成结果展示和 API 层短期记忆"],
+        },
+        mediaType: "image",
+        mediaSrc: "/assets/tinygpt-demo-api.png",
+        mediaLabel: "Fig. 1 — TinyGPT Web Demo: local FastAPI generation interface with checkpoint metadata",
+        mediaType2: "image",
+        mediaSrc2: "/assets/tinygpt-demo-local.png",
+        mediaLabel2: "Fig. 2 — TinyGPT Local Demo: prompt controls, generated output, and training loss preview",
       },
       {
         period: "2026.02 - 2026.04",
@@ -1530,9 +1559,9 @@ function AgentExperienceSection({ sections, lang }: { sections: NonNullable<Deta
               <MediaSlot prefix="agents" mediaType={item.mediaType} mediaSrc={item.mediaSrc} mediaLabel={item.mediaLabel} />
               <MediaSlot prefix="agents" mediaType={item.mediaType2 ?? "image"} mediaSrc={item.mediaSrc2} mediaLabel={item.mediaLabel2 ?? ""} />
             </div>
-          ) : (
+          ) : item.mediaSrc ? (
             <MediaSlot prefix="agents" mediaType={item.mediaType} mediaSrc={item.mediaSrc} mediaLabel={item.mediaLabel} />
-          )}
+          ) : null}
         </article>
       ))}
     </section>
